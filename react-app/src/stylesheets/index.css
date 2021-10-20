@@ -1,13 +1,17 @@
 /* TODO Add site wide styles */
 html {
-  font-size: 10px;
-  --primary-color: #F5F7F7;
-  --dark-accent: #B77387;
-  --light-accent: #9CA99C;
-  --dark-shade: #302C49;
-  --light-shade: #FAF1F6;
+  font-size: 62.5%;
+  font-family: Helvetica;
+  --white-color: #ffffff;
+  --primary-color: #60AEDD;
+  --dark-accent: #965F6C;
+  --light-accent: #D6BB1C;
+  --dark-shade: #2E475B;
+  --light-shade: #F4F6F6;
+  box-sizing: border-box;
 }
 
 body {
-  font-size: 1.4rem;
+  background-color: rgb(242, 242, 242);
+  font-size: 1.6rem;
 }

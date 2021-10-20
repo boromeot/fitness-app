@@ -15,6 +15,10 @@
   padding: 2.5rem;
 }
 
+.form-card > * {
+  margin-bottom: 1rem;
+}
+
 .form-toggle {
   color: var(--light-shade);
   display: flex;
@@ -40,12 +44,15 @@
   padding: .8rem;
   border-bottom: solid 0.8px var(--light-shade);
   width: 85%;
-  margin-bottom: 1rem;
   background-color: transparent;
 }
 
 .form-input:focus {
   outline: none;
+}
+
+.form-error {
+  color: var(--light-shade);
 }
 
 .form-login-btn {

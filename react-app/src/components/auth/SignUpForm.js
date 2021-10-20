@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import '../../stylesheets/forms.css'
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -43,51 +44,54 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
-      <div>
-        <label>User Name</label>
-        <input
-          type='text'
-          name='username'
-          onChange={updateUsername}
-          value={username}
-        ></input>
-      </div>
-      <div>
-        <label>Email</label>
-        <input
-          type='text'
-          name='email'
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type='password'
-          name='password'
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type='password'
-          name='repeat_password'
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type='submit'>Sign Up</button>
-    </form>
+   <div className='form-container'>
+      <form onSubmit={onSignUp} className='form-card'>
+        <h2 className='form-heading'>Sign up</h2>
+        <div>
+          {errors.map((error, ind) => (
+            <div key={ind}>{error}</div>
+          ))}
+        </div>
+          <input
+            type='text'
+            name='username'
+            placeholder='Username'
+            onChange={updateUsername}
+            value={username}
+            className='form-input'
+          ></input>
+          <input
+            type='text'
+            name='email'
+            placeholder='Email'
+            onChange={updateEmail}
+            value={email}
+            className='form-input'
+          ></input>
+          <input
+            type='password'
+            name='password'
+            placeholder='Password'
+            onChange={updatePassword}
+            value={password}
+            className='form-input'
+          ></input>
+          <input
+            type='password'
+            name='repeat_password'
+            placeholder='Repeat Password'
+            onChange={updateRepeatPassword}
+            value={repeatPassword}
+            className='form-input'
+            required={true}
+          ></input>
+        <button type='submit' className='form-login-btn'>Sign Up</button>
+        <div className='form-toggle'>
+            New here?&nbsp;
+            <NavLink to='/login' >Log in</NavLink>
+        </div>
+      </form>
+    </div>
   );
 };
 

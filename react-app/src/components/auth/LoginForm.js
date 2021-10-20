@@ -43,6 +43,10 @@ const LoginForm = () => {
             onChange={updateEmail}
             className='form-input'
           />
+          {
+            errors[0] &&
+            <div className='form-error'>{errors[0]}</div>
+          }
           <input
             name='password'
             type='password'
@@ -51,15 +55,14 @@ const LoginForm = () => {
             onChange={updatePassword}
             className='form-input'
           />
+          {
+            errors[1] &&
+            <div className='form-error'>{errors[1]}</div>
+          }
         <button type='submit' className='form-login-btn'>Login</button>
         <div className='form-toggle'>
             New here?&nbsp;
             <NavLink to='/sign-up' >Sign up</NavLink>
-          </div>
-        <div>
-          {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
-          ))}
         </div>
       </form>
     </div>

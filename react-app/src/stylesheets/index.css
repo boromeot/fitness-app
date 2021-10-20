@@ -1,0 +1,13 @@
+/* TODO Add site wide styles */
+html {
+  font-size: 10px;
+  --primary-color: #F5F7F7;
+  --dark-accent: #B77387;
+  --light-accent: #9CA99C;
+  --dark-shade: #302C49;
+  --light-shade: #FAF1F6;
+}
+
+body {
+  font-size: 1.4rem;
+}

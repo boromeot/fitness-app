@@ -1,7 +1,12 @@
 .form-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.form-logo-container {
+  margin-bottom: 5rem;
 }
 
 .form-card {

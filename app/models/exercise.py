@@ -13,3 +13,4 @@ class Exercise(db.Model):
   #Relationships
   user = db.relationship('User', back_populates='exercises')
   workout = db.relationship('Workout', back_populates='exercises')
+  sets = db.relationship('Set', back_populates='exercise')

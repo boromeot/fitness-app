@@ -9,6 +9,7 @@ html {
   --dark-shade: #161728;
   --light-shade: #F4F6F6;
   box-sizing: border-box;
+  height: 100%;
 }
 
 * {
@@ -17,6 +18,7 @@ html {
 }
 
 body {
+  height: 100%;
   background-color: rgb(242, 242, 242);
   font-size: 1.6rem;
 }

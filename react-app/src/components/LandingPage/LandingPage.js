@@ -22,7 +22,26 @@ const LandingPage = () => {
           <NavLink className='landing-page-main-btn' to='/login' >Explore</NavLink>
         </div>
       </section>
-      <section className='landing-page-section'>
+      <section className='landing-page-section' id='landing-page-info-cards'>
+        <div className='landing-page-card'>
+          <h2 className='landing-page-card-heading'>
+            Achieve your goals
+          </h2>
+        </div>
+        <div className='landing-page-card'>
+          <h2 className='landing-page-card-heading'>
+            Stay organized
+          </h2>
+          <p className='landinge-page-card-info'>Lorem ipsum dorlor me mos vatan di supta</p>
+          <p className='landinge-page-card-info'>Lorem ipsum dorlor me mos vatan di supta</p>
+        </div>
+        <div className='landing-page-card'>
+          <h2 className='landing-page-card-heading'>
+            Achieve your goals
+          </h2>
+        </div>
+      </section>
+      <section className='landing-page-section' id='landing-page-insipring'>
 
       </section>
       </div>

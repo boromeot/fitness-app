@@ -9,3 +9,5 @@ class Cycle(db.Model):
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
   #Relationships
+  user = db.relationships('User', back_populates='cycles')
+  routines = db.relationships('Routine', back_populates='cycle')

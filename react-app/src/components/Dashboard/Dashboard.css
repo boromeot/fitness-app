@@ -2,6 +2,11 @@
   display: flex;
 }
 
+/* content */
+.dashboard-content-container {
+  width: 80%;
+}
+
 
 /* panel */
 .dashboard-panel {

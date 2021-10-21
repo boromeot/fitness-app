@@ -1,18 +1,21 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink, Route, useParams, useRouteMatch } from 'react-router-dom';
 import './Dashboard.css';
+import './Homepage.css';
 
 const Dashboard = () => {
   const { userId } = useParams();
   const { path, url } = useRouteMatch();
+  const { username } = useSelector(state => state.session.user);
 
   return (
     <div className='dashboard-container'>
       <div className='dashboard-panel'>
         <div className='dashboard-logo-container'>
-          <a href={`/users/${userId}/dashboard`}>
-            <img className='dashboard-logo' src='https://i.imgur.com/awqVsCJ.png' alt='' />
-          </a>
+          <NavLink to={`/users/${userId}/dashboard`} activeClassName=''>
+            <img className='dashboard-logo' src='https://i.imgur.com/awqVsCJ.png' alt=''/>
+          </NavLink>
         </div>
         <div className='dashboard-link-container'>
           <NavLink to={`${url}/exercise`} className='dashboard-link' activeClassName='active'>
@@ -26,9 +29,12 @@ const Dashboard = () => {
           </NavLink>
         </div>
       </div>
-      <div>
+      <div className='dashboard-content-container'>
         <Route path={`${path}`} exact>
-          welcome
+          <div className='homepage-container'>
+           <h1 className='homepage-heading'>Welcome back</h1>
+           <h2 className='homepage-subheading'>{ username }</h2>
+          </div>
         </Route>
         <Route path={`${path}/exercise`} >
           exercise

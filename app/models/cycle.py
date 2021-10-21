@@ -1,7 +1,7 @@
 from .db import db
 
 class Cycle(db.Model):
-  __table__ = 'cycles'
+  __tablename__ = 'cycles'
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String, nullable=False)
 
@@ -9,5 +9,5 @@ class Cycle(db.Model):
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
   #Relationships
-  user = db.relationships('User', back_populates='cycles')
-  routines = db.relationships('Routine', back_populates='cycle')
+  user = db.relationship('User', back_populates='cycles')
+  routines = db.relationship('Routine', back_populates='cycle')

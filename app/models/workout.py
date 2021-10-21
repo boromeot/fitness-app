@@ -2,7 +2,7 @@ from app.models.exercise import Exercise
 from .db import db
 
 class Workout(db.Model):
-  __table__ = 'workouts'
+  __tablename__ = 'workouts'
   id = db.Column(db.Integer, primary_key=True)
   day = db.Column(db.String, nullable=False)
 

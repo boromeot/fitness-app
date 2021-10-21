@@ -1,7 +1,7 @@
 from .db import db
 
 class Routine(db.Model):
-  __table__ = 'routines'
+  __tablename__ = 'routines'
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String, nullable=False)
 

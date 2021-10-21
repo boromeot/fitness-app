@@ -1,7 +1,7 @@
 from .db import db
 
 class Set(db.Model):
-  __table__ = 'sets'
+  __tablename__ = 'sets'
   id = db.Column(db.Integer, primary_key=True)
   completed_reps = db.Column(db.Integer, default=0)
   total_reps = db.Column(db.Integer)

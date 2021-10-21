@@ -1,3 +1,4 @@
+from app.models.exercise import Exercise
 from .db import db
 
 class Workout(db.Model):
@@ -12,3 +13,4 @@ class Workout(db.Model):
   #Relationships
   user = db.relationship('User', back_populates='workouts')
   routine = db.relationship('Routine', back_populates='workouts')
+  exercises = db.relationship('Exercise', back_populates='workout')

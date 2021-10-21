@@ -11,3 +11,10 @@ class Cycle(db.Model):
   #Relationships
   user = db.relationship('User', back_populates='cycles')
   routines = db.relationship('Routine', back_populates='cycle')
+
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'name': self.name,
+      'routines': self.routines
+    }

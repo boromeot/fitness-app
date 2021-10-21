@@ -14,3 +14,11 @@ class Exercise(db.Model):
   user = db.relationship('User', back_populates='exercises')
   workout = db.relationship('Workout', back_populates='exercises')
   sets = db.relationship('Set', back_populates='exercise')
+
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'name': self.name,
+      'body_part': self.body_part,
+      'sets': self.sets
+    }

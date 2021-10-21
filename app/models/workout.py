@@ -14,3 +14,10 @@ class Workout(db.Model):
   user = db.relationship('User', back_populates='workouts')
   routine = db.relationship('Routine', back_populates='workouts')
   exercises = db.relationship('Exercise', back_populates='workout')
+
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'day': self.day,
+      'exercises': self.exercises
+    }

@@ -16,3 +16,13 @@ class Set(db.Model):
   #Relationships
   user = db.relationship('User', back_populates='sets')
   exercise = db.relationship('Exercise', back_populates='sets')
+
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'completed_reps': self.completed_reps,
+      'total_reps': self.total_reps,
+      'weight': self.weight,
+      'body_weight': self.body_weight,
+      'is_kilogram': self.is_kilogram
+    }

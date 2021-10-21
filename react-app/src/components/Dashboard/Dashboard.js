@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Route, useParams, useRouteMatch } from 'react-router-dom';
-import LogoutButton from '../auth/LogoutButton';
 import './Dashboard.css';
+import Navigation from './Navigation';
 import ExercisePage from './ExercisePage/ExercisePage';
 import Homepage from './Homepage/Homepage';
 
@@ -30,6 +30,7 @@ const Dashboard = () => {
         </div>
       </div>
       <div className='dashboard-content-container'>
+        <Navigation />
         <Route path={`${path}`} exact>
           <Homepage />
         </Route>

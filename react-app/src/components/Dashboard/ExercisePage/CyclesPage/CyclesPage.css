@@ -1,0 +1,10 @@
+.cycles-page-container {
+  margin: 3rem 6rem;
+}
+
+.cycles-page-button-container {
+  display: flex;
+}
+.cycles-page-create {
+  margin-left: auto;
+}

@@ -1,0 +1,29 @@
+.landing-page-container {
+  margin: 3rem;
+}
+
+.landing-page-section {
+  height: 95vh;
+  background-color: var(--primary-color);
+  margin-bottom: 20vh;
+}
+
+#landing-page-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.landing-page-heading {
+  font-size: 7rem;
+  margin: 6rem 0;
+}
+
+.landing-page-subheading {
+  font-size: 3rem;
+}
+
+.landing-page-subheading, .landing-page-heading {
+  color: var(--light-shade);
+}

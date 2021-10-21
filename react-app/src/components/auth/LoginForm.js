@@ -34,7 +34,7 @@ const LoginForm = () => {
   return (
     <div className='form-container'>
       <div className='form-logo-container' >
-        <img src='https://i.imgur.com/70MGKx1.png' />
+        <img src='https://i.imgur.com/70MGKx1.png' alt='' />
       </div>
       <form onSubmit={onLogin} className='form-card'>
           <h2 className='form-heading'>Log in</h2>

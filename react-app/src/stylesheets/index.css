@@ -6,9 +6,14 @@ html {
   --primary-color: #60AEDD;
   --dark-accent: #965F6C;
   --light-accent: #D6BB1C;
-  --dark-shade: #2E475B;
+  --dark-shade: #161728;
   --light-shade: #F4F6F6;
   box-sizing: border-box;
+}
+
+* {
+  padding: 0;
+  margin: 0;
 }
 
 body {

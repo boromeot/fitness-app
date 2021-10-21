@@ -11,19 +11,38 @@
 #landing-page-header {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+}
+
+.landing-page-heading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 25%;
 }
 
 .landing-page-heading {
   font-size: 7rem;
-  margin: 6rem 0;
+  text-align: center;
 }
 
 .landing-page-subheading {
   font-size: 3rem;
+
 }
 
 .landing-page-subheading, .landing-page-heading {
   color: var(--light-shade);
+  margin-bottom: 3rem;
+}
+
+.landing-page-main-btn {
+  display: inline;
+  padding: 1rem 1.5rem;
+  background-color: var(--light-shade);
+  text-align: center;
+  width: 50%;
+  color: var(--dark-shade);
 }

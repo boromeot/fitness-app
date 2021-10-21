@@ -91,17 +91,27 @@
 
 .landing-page-inspiring-spacer {
   width: 65%;
-  background-color: thistle;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .landing-page-inspiring-text {
-  width: 45%;
-  background-color: rosybrown;
+  height: 25rem;
+  width: 35%;
+  background-color: rgb(235, 235, 235);
+  border: solid 0.8px rgb(85, 85, 85);
+  padding: 1rem;
 }
 
 .landing-page-inspiring-carousel {
-  width: 45%;
-  background-color: royalblue;
+  width: 60%;
+  background-color: rgb(235, 235, 235);
+  border: solid 0.8px rgb(85, 85, 85);
+}
+
+.landing-page-carousel-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16/9;
 }

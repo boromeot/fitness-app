@@ -53,7 +53,7 @@ const LandingPage = () => {
            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </div>
           <div className='landing-page-inspiring-carousel'>
-            IMAGE
+            <img className='landing-page-carousel-image' src='https://i.imgur.com/15kuubS.jpg' alt='' />
           </div>
         </div>
       </section>

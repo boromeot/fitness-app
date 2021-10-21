@@ -1,7 +1,7 @@
 from .db import db
 
 class Cycle(db.Model):
-  __table__ = 'Cycles'
+  __table__ = 'cycles'
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String, nullable=False)
 

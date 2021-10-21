@@ -1,8 +1,7 @@
-from app.models.cycle import Cycle
 from .db import db
 
 class Routine(db.Model):
-  __table__ = 'Routines'
+  __table__ = 'routines'
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String, nullable=False)
 
@@ -13,3 +12,4 @@ class Routine(db.Model):
   #Relationships
   user = db.relationship('User', back_populates='routines')
   cycle = db.relationship('Cycle', back_populates='routines')
+  workouts = db.relationship('Workout', back_populates='routine')

@@ -11,7 +11,8 @@
   height: 6rem;
   width: 6rem;
   border-radius: 50%;
-  background-color: var(--dark-accent);
+  border: solid 0.2rem var(--dark-shade);
+  background-color: var(--light-shade);
   color: var(--light-shade);
   padding: 0.2rem;
   margin-bottom: 1rem;

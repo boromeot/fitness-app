@@ -1,3 +1,9 @@
+.dashboard-container {
+  display: flex;
+}
+
+
+/* panel */
 .dashboard-panel {
   height: 100vh;
   width: 20%;

@@ -1,25 +1,44 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Route, useParams, useRouteMatch } from 'react-router-dom';
 import './Dashboard.css';
 
 const Dashboard = () => {
+  const { userId } = useParams();
+  const { path, url } = useRouteMatch();
+
   return (
-    <div>
+    <div className='dashboard-container'>
       <div className='dashboard-panel'>
         <div className='dashboard-logo-container'>
-          <img className='dashboard-logo' src='https://i.imgur.com/awqVsCJ.png' alt='' />
+          <a href={`/users/${userId}/dashboard`}>
+            <img className='dashboard-logo' src='https://i.imgur.com/awqVsCJ.png' alt='' />
+          </a>
         </div>
         <div className='dashboard-link-container'>
-          <NavLink to='/users/1/dashboard/exercise' className='dashboard-link' activeClassName='active'>
+          <NavLink to={`${url}/exercise`} className='dashboard-link' activeClassName='active'>
             Exercise
           </NavLink>
-          <NavLink to='/users/1/dashboard/ggg' className='dashboard-link'>
+          <NavLink to={`${url}/diet`} className='dashboard-link'>
             Diet
           </NavLink>
-          <NavLink to='/users/1/dashboard/hhh' className='dashboard-link'>
+          <NavLink to={`${url}/progress`} className='dashboard-link'>
             Progress
           </NavLink>
         </div>
+      </div>
+      <div>
+        <Route path={`${path}`} exact>
+          welcome
+        </Route>
+        <Route path={`${path}/exercise`} >
+          exercise
+        </Route>
+        <Route path={`${path}/diet`} >
+          diet
+        </Route>
+        <Route path={`${path}/progress`} >
+          progress
+        </Route>
       </div>
     </div>
   )

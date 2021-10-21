@@ -3,7 +3,13 @@
 }
 
 .landing-page-section {
-  height: 90vh;
+  height: clamp(50rem, 65rem, 70rem);
+}
+
+.landing-page-logo {
+  position: absolute;
+  max-width: 10rem;
+  padding: 3rem;
 }
 
 #landing-page-header {
@@ -55,9 +61,10 @@
 }
 
 .landing-page-card {
-  height: 37rem;
+  height: 60%;
   width: 27rem;
   background-color: rgb(235, 235, 235);
+  border: solid 0.8px rgb(85, 85, 85);
   padding: 3rem;
 }
 
@@ -74,6 +81,27 @@
   color: rgb(85, 85, 85);
 }
 /* Inspiring section */
-#landing-page-insipring {
+#landing-page-inspiring {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--primary-color);
+
+}
+
+.landing-page-inspiring-spacer {
+  width: 65%;
+  background-color: thistle;
+  display: flex;
+  justify-content: space-between;
+}
+
+.landing-page-inspiring-text {
+  width: 45%;
+  background-color: rosybrown;
+}
+
+.landing-page-inspiring-carousel {
+  width: 45%;
+  background-color: royalblue;
 }

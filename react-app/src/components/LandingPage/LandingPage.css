@@ -1,0 +1,117 @@
+.landing-page-container {
+  margin: 3rem;
+}
+
+.landing-page-section {
+  height: clamp(50rem, 65rem, 70rem);
+}
+
+.landing-page-logo {
+  position: absolute;
+  max-width: 10rem;
+  padding: 3rem;
+}
+
+#landing-page-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+}
+
+.landing-page-heading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 25%;
+}
+
+.landing-page-heading {
+  font-size: 7rem;
+  text-align: center;
+}
+
+.landing-page-subheading {
+  font-size: 3rem;
+
+}
+
+.landing-page-subheading, .landing-page-heading {
+  color: var(--light-shade);
+  margin-bottom: 3rem;
+}
+
+.landing-page-main-btn {
+  display: inline;
+  padding: 1rem 1.5rem;
+  background-color: var(--light-shade);
+  text-align: center;
+  width: 50%;
+  color: var(--dark-shade);
+}
+
+/* Info card seciton */
+#landing-page-info-cards {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--light-shade);
+}
+
+.landing-page-card {
+  height: 60%;
+  width: 27rem;
+  background-color: rgb(235, 235, 235);
+  border: solid 0.8px rgb(85, 85, 85);
+  padding: 3rem;
+}
+
+.landing-page-card > * {
+  margin-bottom: 5rem;
+}
+
+.landing-page-card-heading {
+  text-align: center;
+  color: var(--dark-shade);
+}
+
+.landinge-page-card-info {
+  color: rgb(85, 85, 85);
+}
+/* Inspiring section */
+#landing-page-inspiring {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+
+}
+
+.landing-page-inspiring-spacer {
+  width: 65%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.landing-page-inspiring-text {
+  height: 25rem;
+  width: 35%;
+  background-color: rgb(235, 235, 235);
+  border: solid 0.8px rgb(85, 85, 85);
+  padding: 1rem;
+}
+
+.landing-page-inspiring-carousel {
+  width: 60%;
+  background-color: rgb(235, 235, 235);
+  border: solid 0.8px rgb(85, 85, 85);
+}
+
+.landing-page-carousel-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16/9;
+}

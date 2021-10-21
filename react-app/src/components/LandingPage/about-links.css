@@ -1,0 +1,19 @@
+.about-links-container {
+  position: fixed;
+  top: 40%;
+  padding: 1rem;
+}
+
+.about-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  border: solid 0.2rem var(--dark-shade);
+  background-color: var(--light-shade);
+  color: var(--light-shade);
+  padding: 0.2rem;
+  margin-bottom: 1rem;
+}

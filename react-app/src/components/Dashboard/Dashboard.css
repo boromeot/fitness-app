@@ -1,0 +1,55 @@
+.dashboard-container {
+  display: flex;
+}
+
+/* content */
+.dashboard-content-container {
+  width: 80%;
+}
+
+
+/* panel */
+.dashboard-panel {
+  height: 100vh;
+  width: 20%;
+  background-color: var(--primary-color);
+}
+
+/* Header */
+.dashboard-logo-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: var(--light-shade);
+  font-size: 2.2rem;
+  padding-bottom: 2rem;
+}
+
+.dashboard-logo {
+  max-width: 10rem;
+}
+
+/* Links */
+.dashboard-link-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+  margin-left: 10%;
+  height: 75%;
+}
+
+.dashboard-link {
+  display: flex;
+  align-items: center;
+  height: 10%;
+  width: 100%;
+  padding-left: 1rem;
+  border-top-left-radius: 3rem;
+  border-bottom-left-radius: 3rem;
+  color: var(--light-shade);
+}
+
+.active {
+  background-color: var(--light-shade);
+  color: var(--dark-shade);
+}

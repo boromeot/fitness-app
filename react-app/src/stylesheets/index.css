@@ -6,17 +6,28 @@ html {
   --primary-color: #60AEDD;
   --dark-accent: #965F6C;
   --light-accent: #D6BB1C;
-  --dark-shade: #2E475B;
+  --dark-shade: #161728;
   --light-shade: #F4F6F6;
   box-sizing: border-box;
+  height: 100%;
+}
+
+* {
+  padding: 0;
+  margin: 0;
 }
 
 body {
+  height: 100%;
   background-color: rgb(242, 242, 242);
   font-size: 1.6rem;
 }
 
 a {
-  text-decoration: underline;
+  text-decoration: none;
   color: black;
+}
+
+a:hover {
+  cursor: pointer;
 }

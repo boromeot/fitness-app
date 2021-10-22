@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { postCycle } from "../../../../store/cycles";
+import { patchCycle, postCycle } from "../../../../store/cycles";
 import './CycleForm.css';
 
-const CycleForm = ({ setShowModal }) => {
+const CycleForm = ({ setShowModal, method, cycleId }) => {
   const dispatch = useDispatch();
   const { id:userId } = useSelector(state => state.session.user);
   const [name, setName] = useState('');
@@ -12,7 +12,12 @@ const CycleForm = ({ setShowModal }) => {
   const handleSubmit = async e => {
     e.preventDefault();
     setErrors([]);
-    const data = await dispatch(postCycle(name, userId))
+    let data;
+    if (method === 'POST') {
+      data = await dispatch(postCycle(name, userId))
+    } else if (method === 'PATCH') {
+      data = await dispatch(patchCycle(name, userId, cycleId))
+    }
     if (data.errors) {
       setErrors(data.errors);
     } else {
@@ -26,9 +31,9 @@ const CycleForm = ({ setShowModal }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='form-container'>
+    <form onSubmit={handleSubmit} className='cycle-form-container'>
       {errors[0] &&
-        <div className='form-error'>{errors[0]}</div>
+        <div className='cycle-form-error'>{errors[0]}</div>
       }
       <div>
         <input
@@ -36,7 +41,7 @@ const CycleForm = ({ setShowModal }) => {
           placeholder='Cycle name'
           value={name}
           onChange={handleChange}
-          className='form-input'
+          className='cycle-form-input'
         />
       </div>
       <button className='primary-btn btn' type='submit'>Submit</button>

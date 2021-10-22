@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCycle, patchCycle } from "../../../../store/cycles";
+import { deleteCycle } from "../../../../store/cycles";
 import Modal from "../../../Modal/Modal";
 import CycleForm from "./CycleForm";
 import './CyclesPage.css';
@@ -11,6 +11,7 @@ const CyclesPage = () => {
   const { cycles } = useSelector(state => state);
   const [showEdit, setShowEdit] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
 
   const toggleEdit = e => {
     e.preventDefault();
@@ -27,9 +28,9 @@ const CyclesPage = () => {
     dispatch(deleteCycle(cycleId));
   }
 
-  const handleEdit = (e, cycleId) => {
+  const handleEdit = e => {
     e.preventDefault();
-    dispatch(patchCycle('edit', 2, cycleId))
+    setShowModal2(true);
   }
 
   return (
@@ -52,6 +53,11 @@ const CyclesPage = () => {
                   <>
                     <button className='edit-btn btn' onClick={e => handleEdit(e, cycle.id)}>Edit</button>
                     <button className='delete-btn btn' onClick={e => handleDelete(e, cycle.id)} key={cycle.id}>Delete</button>
+                      {cycle.id}
+                    <Modal title='Edit cycle' onClose={() => setShowModal2(false)} show={showModal2} >
+                      {cycle.id}
+                      <CycleForm setShowModal={setShowModal2} method='PATCH' cycleId={cycle.id}/>
+                    </Modal>
                   </>
                 }
               </div>
@@ -60,7 +66,7 @@ const CyclesPage = () => {
         }
       </div>
       <Modal title='Create a cycle' onClose={() => setShowModal(false)} show={showModal}>
-        <CycleForm setShowModal={setShowModal}/>
+        <CycleForm setShowModal={setShowModal} method='POST'/>
       </Modal>
     </div>
   )

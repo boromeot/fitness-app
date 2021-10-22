@@ -24,11 +24,32 @@ const delete_cycle = (cycleId) => {
   };
 }
 
-const patch_cycle = (cycle) => {
+const patch_cycle = (cycleName) => {
   return {
     type: PATCH_CYCLE,
-    payload: cycle
+    payload: cycleName
   };
+}
+
+export const patchCycle = (name, userId, cycleId) => async dispatch => {
+  const response = await fetch(`/api/cycles/${cycleId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name,
+      user_id: userId
+    })
+  });
+  if (response.ok) {
+    const cycle = await response.json();
+    dispatch(patch_cycle(cycle.name));
+    return cycle;
+  } else {
+    const data = await response.json();
+    return data;
+  }
 }
 
 export const getCycles = (userId) => async dispatch => {

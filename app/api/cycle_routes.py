@@ -52,7 +52,7 @@ def delete_cycle(id):
 @cycle_routes.route('/<int:id>', methods=['PATCH'])
 @login_required
 def patch_cycle(id):
-  form = CycleForm
+  form = CycleForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
     cycle = Cycle.query.get(id)

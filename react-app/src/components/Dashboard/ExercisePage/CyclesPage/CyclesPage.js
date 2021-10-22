@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCycle } from "../../../../store/cycles";
+import { deleteCycle, patchCycle } from "../../../../store/cycles";
 import Modal from "../../../Modal/Modal";
 import CycleForm from "./CycleForm";
 import './CyclesPage.css';
@@ -27,6 +27,11 @@ const CyclesPage = () => {
     dispatch(deleteCycle(cycleId));
   }
 
+  const handleEdit = (e, cycleId) => {
+    e.preventDefault();
+    dispatch(patchCycle('edit', 2, cycleId))
+  }
+
   return (
     <div className='cycles-page-container'>
       <div className='cycles-page-button-container'>
@@ -45,7 +50,7 @@ const CyclesPage = () => {
                 {cycle.name}
                 {showEdit &&
                   <>
-                    <button className='edit-btn btn'>Edit</button>
+                    <button className='edit-btn btn' onClick={e => handleEdit(e, cycle.id)}>Edit</button>
                     <button className='delete-btn btn' onClick={e => handleDelete(e, cycle.id)} key={cycle.id}>Delete</button>
                   </>
                 }

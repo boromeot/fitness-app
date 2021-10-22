@@ -24,10 +24,10 @@ const delete_cycle = (cycleId) => {
   };
 }
 
-const patch_cycle = (cycleName) => {
+const patch_cycle = (cycle) => {
   return {
     type: PATCH_CYCLE,
-    payload: cycleName
+    payload: cycle
   };
 }
 
@@ -44,7 +44,7 @@ export const patchCycle = (name, userId, cycleId) => async dispatch => {
   });
   if (response.ok) {
     const cycle = await response.json();
-    dispatch(patch_cycle(cycle.name));
+    dispatch(patch_cycle(cycle));
     return cycle;
   } else {
     const data = await response.json();
@@ -115,11 +115,14 @@ export default function cycles(state = [], action) {
       return newState;
     case DELETE_CYCLE:
       newState = state.filter(cycle => {
-        console.log(typeof cycle.id, 'cycleid');
-        console.log(typeof action.payload, 'payload');
         return cycle.id !== action.payload;
       });
       console.log(newState,'newstate');
+      return newState;
+    case PATCH_CYCLE:
+      newState = [...state];
+      const i = newState.findIndex(cycle => cycle.id === action.payload.id);
+      newState[i].name = action.payload.name;
       return newState;
     default:
       return state;

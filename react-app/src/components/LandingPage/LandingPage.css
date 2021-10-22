@@ -4,6 +4,7 @@
 
 .landing-page-section {
   height: clamp(50rem, 65rem, 70rem);
+  border: solid 1px black;
 }
 
 .landing-page-logo {

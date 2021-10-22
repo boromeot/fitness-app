@@ -34,5 +34,6 @@ def post_cycle():
     )
     db.session.add(cycle)
     db.session.commit()
+    print('suuuuuuuuuuuuuuuuucessssssssssssss')
     return cycle.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401

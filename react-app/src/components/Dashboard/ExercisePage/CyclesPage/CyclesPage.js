@@ -1,14 +1,15 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postCycle } from "../../../../store/cycles";
 import './CyclesPage.css';
 
 const CyclesPage = () => {
   const dispatch = useDispatch();
+  const { id:userId } = useSelector(state => state.session.user);
 
   const handleClick = e => {
     e.preventDefault();
-    dispatch(postCycle('test', 2))
+    dispatch(postCycle('test', userId))
   }
 
   return (

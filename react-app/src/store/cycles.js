@@ -36,6 +36,7 @@ export const postCycle = (name, userId) => async dispatch => {
 
   if (response.ok) {
     const cycle = await response.json();
+    console.log(cycle, 'cycle');
     dispatch(post_cycle(cycle));
     return cycle;
   }
@@ -54,6 +55,7 @@ export default function cycles(state = {}, action) {
     case POST_CYCLE:
       newState = [...state];
       newState.push(action.payload);
+      return newState;
     default:
       return state;
   }

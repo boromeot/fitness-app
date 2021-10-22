@@ -15,3 +15,13 @@
   background-color: green;
   color: var(--light-shade);
 }
+
+.edit-btn {
+  background-color: rgb(190, 190, 190);
+  color: var(--light-shade);
+}
+
+.delete-btn {
+  background-color: crimson;
+  color: var(--light-shade);
+}

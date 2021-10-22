@@ -1,10 +1,27 @@
 .cycles-page-container {
-  margin: 3rem 6rem;
+  padding: 3rem 6rem;
+  overflow-y: auto;
 }
 
 .cycles-page-button-container {
   display: flex;
+  justify-content: flex-end;
 }
-.cycles-page-create {
-  margin-left: auto;
+.cycles-page-create, .cycles-page-edit {
+  margin-left: 1rem;
+}
+
+.cycle-conatiner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cycle {
+  width: 50%;
+  border: solid 1px black;
+  font-size: 2rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
 }

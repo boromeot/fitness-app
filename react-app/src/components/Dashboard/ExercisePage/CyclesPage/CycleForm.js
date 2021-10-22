@@ -41,7 +41,7 @@ const CycleForm = ({ setShowModal, method, cycleId }) => {
           placeholder='Cycle name'
           value={name}
           onChange={handleChange}
-          className='cycle-form-input'
+          className='form-input cycle-form-input'
         />
       </div>
       <button className='primary-btn btn' type='submit'>Submit</button>

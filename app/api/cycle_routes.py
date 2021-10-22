@@ -46,4 +46,21 @@ def delete_cycle(id):
     db.session.commit()
     return {'message': 'Successfully deleted cycle'}
   else:
-    return {'message': 'Unauthorized'}
+    return {'errors': ['Unathorized']}
+
+
+@cycle_routes.route('/<int:id>', methods=['PATCH'])
+@login_required
+def patch_cycle(id):
+  form = CycleForm
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    cycle = Cycle.query.get(id)
+    if current_user.id == cycle.user_id:
+      cycle.name = form.data['name']
+      db.session.commit()
+      return cycle.to_dict()
+    else:
+      return {'errors': ['Unathorized']}
+  else:
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401

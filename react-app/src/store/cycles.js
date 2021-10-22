@@ -1,6 +1,7 @@
 const GET_CYCLES = 'cycles/getCycles';
 const POST_CYCLE = 'cycles/postCycle';
 const DELETE_CYCLE = 'cycles/deleteCycle';
+const PATCH_CYCLE = 'cycles/patchCycle';
 
 const get_cycles = (cyclesArr) => {
   return {
@@ -23,12 +24,20 @@ const delete_cycle = (cycleId) => {
   };
 }
 
+const patch_cycle = (cycle) => {
+  return {
+    type: PATCH_CYCLE,
+    payload: cycle
+  };
+}
+
 export const getCycles = (userId) => async dispatch => {
   const response = await fetch(`/api/cycles/${userId}`);
   const cyclesArr = await response.json();
   dispatch(get_cycles(cyclesArr));
   return response;
 }
+
 
 export const postCycle = (name, userId) => async dispatch => {
   const response = await fetch(`/api/cycles/`, {
@@ -53,6 +62,7 @@ export const postCycle = (name, userId) => async dispatch => {
   }
 }
 
+
 export const deleteCycle = (cycleId) => async dispatch => {
   const reponse = await fetch(`/api/cycles/${cycleId}`, {
     method: 'DELETE',
@@ -70,6 +80,7 @@ export const deleteCycle = (cycleId) => async dispatch => {
     return data;
   }
 }
+
 
 export default function cycles(state = [], action) {
   let newState;

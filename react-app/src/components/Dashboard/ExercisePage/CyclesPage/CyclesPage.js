@@ -39,7 +39,7 @@ const CyclesPage = () => {
         {
           cycles?.map(cycle => {
             return (
-              <div className='cycle'>
+              <div key={cycle.id} className='cycle'>
                 {cycle.name}
                 {showEdit &&
                   <>

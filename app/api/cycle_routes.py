@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import Cycle, db
 from app.forms import CycleForm
 
@@ -41,6 +41,9 @@ def post_cycle():
 @login_required
 def delete_cycle(id):
   cycle = Cycle.query.get(id)
-  db.session.delete(cycle)
-  db.session.commit()
-  return {'message': 'Successfully deleted cycle'}
+  if current_user.id == cycle.user_id:
+    db.session.delete(cycle)
+    db.session.commit()
+    return {'message': 'Successfully deleted cycle'}
+  else:
+    return {'message': 'Unauthorized'}

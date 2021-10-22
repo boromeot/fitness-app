@@ -13,13 +13,13 @@ const ExercisePage = () => {
   }, [dispatch, userId])
   return (
     <div>
-      <Route path={`${path}/cycles`} exact>
+      <Route path={`${path}/cycles`} >
         <CyclesPage />
       </Route>
-      <Route path={`${path}/routines`} exact>
+      <Route path={`${path}/routines`} >
         Routines
       </Route>
-      <Route path={`${path}/exercises`} exact>
+      <Route path={`${path}/exercises`} >
         Exercises
       </Route>
     </div>

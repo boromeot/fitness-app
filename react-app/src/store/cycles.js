@@ -36,7 +36,6 @@ export const postCycle = (name, userId) => async dispatch => {
 
   if (response.ok) {
     const cycle = await response.json();
-    console.log(cycle, 'cycle');
     dispatch(post_cycle(cycle));
     return cycle;
   }

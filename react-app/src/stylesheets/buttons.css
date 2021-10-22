@@ -1,0 +1,17 @@
+.btn {
+  padding: 1rem;
+  border: none;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.primary-btn {
+  background-color: green;
+  color: var(--light-shade);
+}

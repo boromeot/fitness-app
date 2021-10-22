@@ -16,7 +16,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 #Get all cycles by user Id
-@cycle_routes.route('/<int:userId>')
+@cycle_routes.route('/<int:userId>', methods=['GET'])
 @login_required
 def get_cycles(userId):
   cycles = Cycle.query.filter(Cycle.user_id == userId)
@@ -36,3 +36,11 @@ def post_cycle():
     db.session.commit()
     return cycle.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@cycle_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_cycle(id):
+  cycle = Cycle.query.get(id)
+  db.session.delete(cycle)
+  db.session.commit()
+  return {'message': 'Successfully deleted cycle'}

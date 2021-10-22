@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postCycle } from "../../../../store/cycles";
+import { deleteCycle, postCycle } from "../../../../store/cycles";
 import './CyclesPage.css';
 import '../../../../stylesheets/buttons.css';
 
@@ -20,9 +20,9 @@ const CyclesPage = () => {
     dispatch(postCycle('test', userId))
   }
 
-  const handleDelete = e => {
+  const handleDelete = (e, cycleId) => {
     e.preventDefault();
-    
+    dispatch(deleteCycle(cycleId));
   }
 
   return (
@@ -44,7 +44,7 @@ const CyclesPage = () => {
                 {showEdit &&
                   <>
                     <button className='edit-btn btn'>Edit</button>
-                    <button className='delete-btn btn'>Delete</button>
+                    <button className='delete-btn btn' onClick={e => handleDelete(e, cycle.id)} key={cycle.id}>Delete</button>
                   </>
                 }
               </div>

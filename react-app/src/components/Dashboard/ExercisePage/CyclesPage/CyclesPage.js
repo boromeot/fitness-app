@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postCycle } from "../../../../store/cycles";
+import { getCycles, postCycle } from "../../../../store/cycles";
 import './CyclesPage.css';
 import '../../../../stylesheets/buttons.css';
 
 const CyclesPage = () => {
   const dispatch = useDispatch();
   const { id:userId } = useSelector(state => state.session.user);
+  const { cycles } = useSelector(state => state);
 
   const handleClick = e => {
     e.preventDefault();
@@ -20,7 +21,13 @@ const CyclesPage = () => {
           Create new cycle
         </button>
       </div>
-
+      <div>
+        {
+          cycles?.map(cycle => {
+            return <div>{cycle.name}</div>
+          })
+        }
+      </div>
     </div>
   )
 }

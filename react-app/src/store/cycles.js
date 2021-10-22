@@ -45,7 +45,7 @@ export const postCycle = (name, userId) => async dispatch => {
   }
 }
 
-export default function cycles(state = {}, action) {
+export default function cycles(state = [], action) {
   let newState;
   switch (action.type) {
     case GET_CYCLES:

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCycle, postCycle } from "../../../../store/cycles";
+import { deleteCycle } from "../../../../store/cycles";
+import Modal from "../../../Modal/Modal";
+import CycleForm from "./CycleForm";
 import './CyclesPage.css';
 import '../../../../stylesheets/buttons.css';
 
 const CyclesPage = () => {
   const dispatch = useDispatch();
-  const { id:userId } = useSelector(state => state.session.user);
   const { cycles } = useSelector(state => state);
   const [showEdit, setShowEdit] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const toggleEdit = e => {
     e.preventDefault();
@@ -17,7 +19,7 @@ const CyclesPage = () => {
 
   const handleCreate = e => {
     e.preventDefault();
-    dispatch(postCycle('test', userId))
+    setShowModal(true);
   }
 
   const handleDelete = (e, cycleId) => {
@@ -52,6 +54,9 @@ const CyclesPage = () => {
           })
         }
       </div>
+      <Modal title='Create a cycle' onClose={() => setShowModal(false)} show={showModal}>
+        <CycleForm setShowModal={setShowModal}/>
+      </Modal>
     </div>
   )
 }

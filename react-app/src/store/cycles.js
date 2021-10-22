@@ -49,7 +49,7 @@ export const postCycle = (name, userId) => async dispatch => {
   }
   else {
     const data = await response.json();
-    return data.errors ? data.errors : null;
+    return data;
   }
 }
 

@@ -1,6 +1,6 @@
 .navigation-container {
   display: flex;
-  height: 12.52rem;
+  height: 15vh;
   border-bottom: solid 0.6px rgba(85, 85, 85, 0.3);
   /* background-color: var(--dark-shade); */
   /* color: var(--light-shade); */

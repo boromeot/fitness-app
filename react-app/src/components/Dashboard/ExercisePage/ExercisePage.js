@@ -12,7 +12,7 @@ const ExercisePage = () => {
     dispatch(getCycles(userId));
   }, [dispatch, userId])
   return (
-    <div>
+    <>
       <Route path={`${path}/cycles`} exact>
         <CyclesPage />
       </Route>
@@ -22,7 +22,7 @@ const ExercisePage = () => {
       <Route path={`${path}/exercises`} exact>
         Exercises
       </Route>
-    </div>
+    </>
   )
 }
 

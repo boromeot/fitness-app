@@ -1,6 +1,7 @@
 const GET_CYCLES = 'cycles/getCycles';
 const POST_CYCLE = 'cycles/postCycle';
 const DELETE_CYCLE = 'cycles/deleteCycle';
+const PATCH_CYCLE = 'cycles/patchCycle';
 
 const get_cycles = (cyclesArr) => {
   return {
@@ -23,12 +24,41 @@ const delete_cycle = (cycleId) => {
   };
 }
 
+const patch_cycle = (cycle) => {
+  return {
+    type: PATCH_CYCLE,
+    payload: cycle
+  };
+}
+
+export const patchCycle = (name, userId, cycleId) => async dispatch => {
+  const response = await fetch(`/api/cycles/${cycleId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name,
+      user_id: userId
+    })
+  });
+  if (response.ok) {
+    const cycle = await response.json();
+    dispatch(patch_cycle(cycle));
+    return cycle;
+  } else {
+    const data = await response.json();
+    return data;
+  }
+}
+
 export const getCycles = (userId) => async dispatch => {
   const response = await fetch(`/api/cycles/${userId}`);
   const cyclesArr = await response.json();
   dispatch(get_cycles(cyclesArr));
   return response;
 }
+
 
 export const postCycle = (name, userId) => async dispatch => {
   const response = await fetch(`/api/cycles/`, {
@@ -49,9 +79,10 @@ export const postCycle = (name, userId) => async dispatch => {
   }
   else {
     const data = await response.json();
-    return data.errors ? data.errors : null;
+    return data;
   }
 }
+
 
 export const deleteCycle = (cycleId) => async dispatch => {
   const reponse = await fetch(`/api/cycles/${cycleId}`, {
@@ -71,6 +102,7 @@ export const deleteCycle = (cycleId) => async dispatch => {
   }
 }
 
+
 export default function cycles(state = [], action) {
   let newState;
   switch (action.type) {
@@ -83,11 +115,14 @@ export default function cycles(state = [], action) {
       return newState;
     case DELETE_CYCLE:
       newState = state.filter(cycle => {
-        console.log(typeof cycle.id, 'cycleid');
-        console.log(typeof action.payload, 'payload');
         return cycle.id !== action.payload;
       });
       console.log(newState,'newstate');
+      return newState;
+    case PATCH_CYCLE:
+      newState = [...state];
+      const i = newState.findIndex(cycle => cycle.id === action.payload.id);
+      newState[i].name = action.payload.name;
       return newState;
     default:
       return state;

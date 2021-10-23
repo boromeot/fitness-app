@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteCycle, postCycle } from "../../../../store/cycles";
+import { useSelector } from "react-redux";
+import Modal from "../../../Modal/Modal";
+import CycleForm from "./CycleForm";
+import Cycle from "./Cycle";
 import './CyclesPage.css';
 import '../../../../stylesheets/buttons.css';
 
 const CyclesPage = () => {
-  const dispatch = useDispatch();
-  const { id:userId } = useSelector(state => state.session.user);
+
   const { cycles } = useSelector(state => state);
   const [showEdit, setShowEdit] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const toggleEdit = e => {
     e.preventDefault();
@@ -17,12 +19,7 @@ const CyclesPage = () => {
 
   const handleCreate = e => {
     e.preventDefault();
-    dispatch(postCycle('test', userId))
-  }
-
-  const handleDelete = (e, cycleId) => {
-    e.preventDefault();
-    dispatch(deleteCycle(cycleId));
+    setShowModal(true);
   }
 
   return (
@@ -39,19 +36,14 @@ const CyclesPage = () => {
         {
           cycles?.map(cycle => {
             return (
-              <div className='cycle'>
-                {cycle.name}
-                {showEdit &&
-                  <>
-                    <button className='edit-btn btn'>Edit</button>
-                    <button className='delete-btn btn' onClick={e => handleDelete(e, cycle.id)} key={cycle.id}>Delete</button>
-                  </>
-                }
-              </div>
+              <Cycle cycle={cycle} showEdit={showEdit} key={cycle.id}/>
             )
           })
         }
       </div>
+      <Modal title='Create a cycle' onClose={() => setShowModal(false)} show={showModal}>
+        <CycleForm setShowModal={setShowModal} method='POST'/>
+      </Modal>
     </div>
   )
 }

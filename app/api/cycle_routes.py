@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import Cycle, db
 from app.forms import CycleForm
 
@@ -41,6 +41,26 @@ def post_cycle():
 @login_required
 def delete_cycle(id):
   cycle = Cycle.query.get(id)
-  db.session.delete(cycle)
-  db.session.commit()
-  return {'message': 'Successfully deleted cycle'}
+  if current_user.id == cycle.user_id:
+    db.session.delete(cycle)
+    db.session.commit()
+    return {'message': 'Successfully deleted cycle'}
+  else:
+    return {'errors': ['Unathorized']}
+
+
+@cycle_routes.route('/<int:id>', methods=['PATCH'])
+@login_required
+def patch_cycle(id):
+  form = CycleForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    cycle = Cycle.query.get(id)
+    if current_user.id == cycle.user_id:
+      cycle.name = form.data['name']
+      db.session.commit()
+      return cycle.to_dict()
+    else:
+      return {'errors': ['Unathorized']}
+  else:
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401

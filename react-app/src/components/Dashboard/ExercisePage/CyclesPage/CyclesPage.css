@@ -19,9 +19,22 @@
 }
 
 .cycle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 3.6rem;
   width: 50%;
   border: solid 1px black;
   font-size: 2rem;
   padding: 1rem;
   margin-bottom: 1rem;
+  word-wrap: break-word;
+}
+
+.cycle-name {
+  max-width: 75%;
+}
+
+.cycle-button-container > button {
+  margin-left: 1rem;
 }

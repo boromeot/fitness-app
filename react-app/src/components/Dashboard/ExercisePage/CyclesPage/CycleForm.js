@@ -31,9 +31,9 @@ const CycleForm = ({ setShowModal, method, cycleId }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='cycle-form-container'>
+    <form onSubmit={handleSubmit} className='form-container cycle-form-container'>
       {errors[0] &&
-        <div className='cycle-form-error'>{errors[0]}</div>
+        <div className='form-error cycle-form-error'>{errors[0]}</div>
       }
       <div>
         <input

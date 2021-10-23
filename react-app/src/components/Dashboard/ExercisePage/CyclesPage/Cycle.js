@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import { deleteCycle } from "../../../../store/cycles";
 import Modal from "../../../Modal/Modal";
 import CycleForm from "./CycleForm";
+
 const Cycle = ({ cycle, showEdit }) => {
   const dispatch = useDispatch();
-
   const [showModal, setShowModal] = useState(false);
 
   const handleDelete = (e, cycleId) => {
@@ -20,14 +20,16 @@ const Cycle = ({ cycle, showEdit }) => {
 
   return (
     <div key={cycle.id} className='cycle'>
-      {cycle.name}
+      <div className='cycle-name'>
+        {cycle.name}
+      </div>
       {showEdit &&
         <>
-          <button className='edit-btn btn' onClick={handleEdit}>Edit</button>
-          <button className='delete-btn btn' onClick={e => handleDelete(e, cycle.id)}>Delete</button>
-            {cycle.id}
+          <div className='cycle-button-container'>
+            <button className='edit-btn btn' onClick={handleEdit}>Edit</button>
+            <button className='delete-btn btn' onClick={e => handleDelete(e, cycle.id)}>Delete</button>
+          </div>
           <Modal title='Edit cycle' onClose={() => setShowModal(false)} show={showModal} >
-            {cycle.id}
             <CycleForm setShowModal={setShowModal} method='PATCH' cycleId={cycle.id}/>
           </Modal>
         </>

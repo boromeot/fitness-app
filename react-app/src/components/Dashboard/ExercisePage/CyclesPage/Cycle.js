@@ -19,7 +19,7 @@ const Cycle = ({ cycle, showEdit }) => {
   }
 
   return (
-    <div key={cycle.id} className='cycle'>
+    <>
       <div className='cycle-name'>
         {cycle.name}
       </div>
@@ -34,7 +34,7 @@ const Cycle = ({ cycle, showEdit }) => {
           </Modal>
         </>
       }
-    </div>
+    </>
   )
 }
 

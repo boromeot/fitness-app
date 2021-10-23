@@ -3,6 +3,7 @@ import { Route, useRouteMatch } from "react-router";
 import CyclesPage from "./CyclesPage/CyclesPage";
 import { useDispatch, useSelector } from "react-redux";
 import { getCycles } from "../../../store/cycles";
+import RoutinePage from "./RoutinePage/RoutinePage";
 
 const ExercisePage = () => {
   const { path } = useRouteMatch();
@@ -15,6 +16,9 @@ const ExercisePage = () => {
     <>
       <Route path={`${path}/cycles`} exact>
         <CyclesPage />
+      </Route>
+      <Route path={`${path}/cycles/:cycleId/routines`} >
+        <RoutinePage />
       </Route>
       <Route path={`${path}/routines`} exact>
         Routines

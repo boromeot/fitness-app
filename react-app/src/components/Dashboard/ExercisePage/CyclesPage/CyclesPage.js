@@ -5,9 +5,10 @@ import CycleForm from "./CycleForm";
 import Cycle from "./Cycle";
 import './CyclesPage.css';
 import '../../../../stylesheets/buttons.css';
+import { NavLink, useRouteMatch } from "react-router-dom";
 
 const CyclesPage = () => {
-
+  const { url } = useRouteMatch();
   const { cycles } = useSelector(state => state);
   const [showEdit, setShowEdit] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -36,7 +37,9 @@ const CyclesPage = () => {
         {
           cycles?.map(cycle => {
             return (
-              <Cycle cycle={cycle} showEdit={showEdit} key={cycle.id}/>
+              <NavLink to={`${url}/${cycle.id}/routines`} className='cycle' key={cycle.id}>
+                <Cycle cycle={cycle} showEdit={showEdit} />
+              </NavLink>
             )
           })
         }

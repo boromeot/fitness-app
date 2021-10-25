@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Modal from "../../Modal/Modal";
 
-const Card = ({ item, showEditButtons, name, Form, dispatcher }) => {
+const Card = ({ item, showEditButtons, name, Form, deleteDispatcher }) => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
 
   const handleDelete = (e, cycleId) => {
     e.preventDefault();
-    dispatch(dispatcher(cycleId));
+    dispatch(deleteDispatcher(cycleId));
   }
 
   const toggleEditModal = e => {

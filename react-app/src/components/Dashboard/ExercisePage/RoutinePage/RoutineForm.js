@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { patchCycle, postCycle } from "../../../../store/cycles";
-import './CycleForm.css';
+import { postRoutine } from "../../../../store/routine";
+import '../CyclesPage/CycleForm.css';
 
-const CycleForm = ({ setShowModal, method, cycleId, component }) => {
+const RoutineForm = ({ setShowModal, method, cycleId, component }) => {
   const dispatch = useDispatch();
   const { id:userId } = useSelector(state => state.session.user);
   const [name, setName] = useState('');
@@ -14,9 +14,7 @@ const CycleForm = ({ setShowModal, method, cycleId, component }) => {
     setErrors([]);
     let data;
     if (method === 'POST') {
-      data = await dispatch(postCycle(name, userId))
-    } else if (method === 'PATCH') {
-      data = await dispatch(patchCycle(name, userId, cycleId))
+      data = await dispatch(postRoutine(name, userId, cycleId))
     }
     if (data.errors) {
       setErrors(data.errors);
@@ -49,4 +47,4 @@ const CycleForm = ({ setShowModal, method, cycleId, component }) => {
   )
 }
 
-export default CycleForm;
+export default RoutineForm;

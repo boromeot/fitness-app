@@ -14,10 +14,10 @@ const CyclesPage = () => {
   return (
     <PageTemplate name='cycle' Form={CycleForm} setShowEditButtons={setShowEditButtons}>
       {
-        cycles?.map(item => {
+        cycles?.map(cycle => {
           return (
-            <NavLink to={`${url}/${item.id}/routines`} className='card' key={item.id}>
-              <Card item={item} showEditButtons={showEditButtons} name={'cycle'} Form={CycleForm} dispatcher={deleteCycle}/>
+            <NavLink to={`${url}/${cycle.id}/routines`} className='card' key={cycle.id}>
+              <Card name={'cycle'} item={cycle} showEditButtons={showEditButtons} Form={CycleForm} deleteDispatcher={deleteCycle}/>
             </NavLink>
           )
         })

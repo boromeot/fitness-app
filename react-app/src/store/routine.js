@@ -10,7 +10,7 @@ const get_routines = (routineArr) => {
 
 const post_routine = (routine, cycleId) => {
   return {
-    type: POST_CYCLE,
+    type: POST_ROUTINE,
     payload: {
       routine,
       cycleId

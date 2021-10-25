@@ -130,8 +130,8 @@ export default function cycles(state = [], action) {
 
     case POST_ROUTINE:
       newState = [...state];
-      const i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
-      newState[i].append(action.payload.routine);
+      const j = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
+      newState[j].append(action.payload.routine);
       return newState;
       default:
       return state;

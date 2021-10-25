@@ -1,4 +1,5 @@
 export const POST_ROUTINE = 'routine/postRoutine';
+export const DELETE_ROUTINE = 'routine/deleteRoutine';
 
 const post_routine = (routine, cycleId) => {
   return {
@@ -7,6 +8,13 @@ const post_routine = (routine, cycleId) => {
       routine,
       cycleId
     }
+  };
+}
+
+const delete_routine = (routineId) => {
+  return {
+    type: DELETE_ROUTINE,
+    payload: routineId
   };
 }
 
@@ -31,6 +39,24 @@ export const postRoutine = (name, userId, cycleId) => async dispatch => {
   }
   else {
     const data = await response.json();
+    return data;
+  }
+}
+
+export const deleteRoutine = (routineId) => async dispatch => {
+  const resposne = await fetch(`/api/routines/${routineId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      routine_id: routineId
+    })
+  });
+
+  if (reponse.ok) {
+    const data = await reponse.json();
+    dispatch(delete_cycle(cycleId));
     return data;
   }
 }

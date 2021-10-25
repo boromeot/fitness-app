@@ -31,26 +31,6 @@ const patch_cycle = (cycle) => {
   };
 }
 
-export const patchCycle = (name, userId, cycleId) => async dispatch => {
-  const response = await fetch(`/api/cycles/${cycleId}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name,
-      user_id: userId
-    })
-  });
-  if (response.ok) {
-    const cycle = await response.json();
-    dispatch(patch_cycle(cycle));
-    return cycle;
-  } else {
-    const data = await response.json();
-    return data;
-  }
-}
 
 export const getCycles = (userId) => async dispatch => {
   const response = await fetch(`/api/cycles/${userId}`);
@@ -103,6 +83,27 @@ export const deleteCycle = (cycleId) => async dispatch => {
 }
 
 
+export const patchCycle = (name, userId, cycleId) => async dispatch => {
+  const response = await fetch(`/api/cycles/${cycleId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name,
+      user_id: userId
+    })
+  });
+  if (response.ok) {
+    const cycle = await response.json();
+    dispatch(patch_cycle(cycle));
+    return cycle;
+  } else {
+    const data = await response.json();
+    return data;
+  }
+}
+
 export default function cycles(state = [], action) {
   let newState;
   switch (action.type) {
@@ -124,6 +125,8 @@ export default function cycles(state = [], action) {
       const i = newState.findIndex(cycle => cycle.id === action.payload.id);
       newState[i].name = action.payload.name;
       return newState;
+
+    
     default:
       return state;
   }

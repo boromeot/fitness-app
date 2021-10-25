@@ -1,4 +1,5 @@
-const GET_ROUTINES = 'cycles/getRoutine';
+const GET_ROUTINES = 'routine/getRoutine';
+const POST_ROUTINE = 'routine/postRoutine';
 
 const get_routines = (routineArr) => {
   return {
@@ -7,6 +8,14 @@ const get_routines = (routineArr) => {
   };
 }
 
+const post_routine = routine => {
+  return {
+    type: POST_CYCLE,
+    payload: routine
+  };
+}
+
+//Get routines by cycle id
 export const getRoutines = (cycleId) => async dispatch => {
-  
+
 }

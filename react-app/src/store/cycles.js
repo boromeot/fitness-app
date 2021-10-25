@@ -137,7 +137,7 @@ export default function cycles(state = [], action) {
       newState = [...state];
       i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
       newState[i].routines = newState[i].routines.filter(routine => {
-        return routine.id !== action.payload;
+        return routine.id !== action.payload.routineId;
       });
       return newState;
     default:

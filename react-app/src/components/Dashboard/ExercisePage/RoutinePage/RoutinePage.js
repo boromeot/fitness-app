@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, NavLink, useRouteMatch } from 'react-router-dom';
+import { deleteRoutine } from '../../../../store/routine';
 import Card from '../../templates/Card';
 import PageTemplate from '../../templates/PageTemplate';
 import RoutineForm from './RoutineForm';
@@ -17,7 +18,7 @@ const RoutinePage = () => {
         currentCycle.routines?.map(routine => {
           return (
             <NavLink to={`${url}/${routine.id}`} className='card' key={routine.id}>
-              <Card name='routine' item={routine} showEditButtons={showEditButtons} Form={RoutineForm} deleteDispatcher={null}/>
+              <Card name='routine' item={routine} showEditButtons={showEditButtons} Form={RoutineForm} deleteDispatcher={deleteRoutine}/>
             </NavLink>
           )
         })

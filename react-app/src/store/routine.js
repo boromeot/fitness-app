@@ -11,10 +11,13 @@ const post_routine = (routine, cycleId) => {
   };
 }
 
-const delete_routine = (routineId) => {
+const delete_routine = (routineId, cycleId) => {
   return {
     type: DELETE_ROUTINE,
-    payload: routineId
+    payload: {
+      routineId,
+      cycleId
+    }
   };
 }
 
@@ -43,7 +46,7 @@ export const postRoutine = (name, userId, cycleId) => async dispatch => {
   }
 }
 
-export const deleteRoutine = (routineId) => async dispatch => {
+export const deleteRoutine = (routineId, cycleId) => async dispatch => {
   const response = await fetch(`/api/routines/${routineId}`, {
     method: 'DELETE',
     headers: {
@@ -56,7 +59,7 @@ export const deleteRoutine = (routineId) => async dispatch => {
 
   if (response.ok) {
     const data = await response.json();
-    dispatch(delete_routine(routineId));
+    dispatch(delete_routine(routineId, cycleId));
     return data;
   }
 }

@@ -14,7 +14,7 @@ const RoutineForm = ({ setShowModal, method, cycleId, component }) => {
     setErrors([]);
     let data;
     if (method === 'POST') {
-      data = await dispatch(postRoutine(name, userId, cycleId))
+      data = await dispatch(postRoutine(name, userId, +cycleId))
     }
     if (data.errors) {
       setErrors(data.errors);

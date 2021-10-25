@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Modal from "../../Modal/Modal";
 
-const Card = ({ item, showEdit, name, Form, dispatcher }) => {
+const Card = ({ item, showEditButtons, name, Form, dispatcher }) => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
 
@@ -11,7 +11,8 @@ const Card = ({ item, showEdit, name, Form, dispatcher }) => {
     dispatch(dispatcher(cycleId));
   }
 
-  const handleEdit = e => {
+  const toggleEditModal = e => {
+    e.stopPropagation();
     e.preventDefault();
     setShowModal(true);
   }
@@ -21,10 +22,10 @@ const Card = ({ item, showEdit, name, Form, dispatcher }) => {
       <div className='card-name'>
         {item.name}
       </div>
-      {showEdit &&
+      {showEditButtons &&
         <>
           <div className='card-button-container'>
-            <button className='edit-btn btn' onClick={handleEdit}>Edit</button>
+            <button className='edit-btn btn' onClick={toggleEditModal}>Edit</button>
             <button className='delete-btn btn' onClick={e => handleDelete(e, item.id)}>Delete</button>
           </div>
           <Modal title={`Edit ${name}`} onClose={() => setShowModal(false)} show={showModal} >
@@ -34,6 +35,6 @@ const Card = ({ item, showEdit, name, Form, dispatcher }) => {
       }
     </>
   )
-} 
+}
 
 export default Card;

@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 import Modal from "../../Modal/Modal";
-import Card from "./Card";
 import './CyclesPage.css';
 import '../../../stylesheets/buttons.css';
-import { NavLink, useRouteMatch } from "react-router-dom";
 
-const PageWrapper = ({ data, path, name, Form, dispatcher}) => {
-  const { url } = useRouteMatch();
-  const [showEdit, setShowEdit] = useState(false);
+const PageWrapper = ({ name, Form, children, setShowEditButtons}) => {
   const [showModal, setShowModal] = useState(false);
 
-  const toggleEdit = e => {
+  const toggleEditMode = e => {
     e.preventDefault();
-    setShowEdit(prev => !prev);
+    setShowEditButtons(prev => !prev);
   }
 
   const handleCreate = e => {
@@ -23,7 +19,7 @@ const PageWrapper = ({ data, path, name, Form, dispatcher}) => {
   return (
     <div className='page-template-container'>
       <div className='page-template-button-container'>
-        <button className='page-template-edit edit-btn btn' onClick={toggleEdit}>
+        <button className='page-template-edit edit-btn btn' onClick={toggleEditMode}>
           Edit mode
         </button>
         <button className='page-template-create primary-btn btn' onClick={handleCreate}>
@@ -31,15 +27,7 @@ const PageWrapper = ({ data, path, name, Form, dispatcher}) => {
         </button>
       </div>
       <div className='card-conatiner'>
-        {
-          data?.map(item => {
-            return (
-              <NavLink to={`${url}/${item.id}/${path}`} className='card' key={item.id}>
-                <Card item={item} showEdit={showEdit} name={name} Form={Form} dispatcher={dispatcher}/>
-              </NavLink>
-            )
-          })
-        }
+        {children}
       </div>
       <Modal title={`Create a ${name}`} onClose={() => setShowModal(false)} show={showModal}>
         <Form setShowModal={setShowModal} method='POST' component={name}/>

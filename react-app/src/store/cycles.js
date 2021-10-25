@@ -1,3 +1,5 @@
+import { POST_ROUTINE } from "./routine";
+
 const GET_CYCLES = 'cycles/getCycles';
 const POST_CYCLE = 'cycles/postCycle';
 const DELETE_CYCLE = 'cycles/deleteCycle';
@@ -126,7 +128,9 @@ export default function cycles(state = [], action) {
       newState[i].name = action.payload.name;
       return newState;
 
-    
+    case POST_ROUTINE:
+      newState = [...state];
+      
     default:
       return state;
   }

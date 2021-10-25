@@ -1,5 +1,5 @@
 const GET_ROUTINES = 'routine/getRoutine';
-const POST_ROUTINE = 'routine/postRoutine';
+export const POST_ROUTINE = 'routine/postRoutine';
 
 const get_routines = (routineArr) => {
   return {
@@ -8,14 +8,19 @@ const get_routines = (routineArr) => {
   };
 }
 
-const post_routine = routine => {
+const post_routine = (routine, cycleId) => {
   return {
     type: POST_CYCLE,
-    payload: routine
+    payload: {
+      routine,
+      cycleId
+    }
   };
 }
 
-export const postRoutine = (name, userId) => async dispatch => {
+//Create a new routine in the database
+//Append the new routine the the associated cycle routine array
+export const postRoutine = (name, userId, cycleId) => async dispatch => {
   const response = await fetch(`/api/routines/`, {
     method: 'POST',
     headers: {
@@ -28,7 +33,7 @@ export const postRoutine = (name, userId) => async dispatch => {
   });
   if (response.ok) {
     const routine = await response.json();
-    dispatch(post_routine(routine));
+    dispatch(post_routine(routine, cycleId));
     return routine;
   }
   else {

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CycleForm from "./CycleForm";
 import { deleteCycle } from "../../../../store/cycles";
 import { NavLink, useRouteMatch } from 'react-router-dom';
-import Card from "../../templates/Card";
 import Modal from "../../../Modal/Modal";
 import '../../templates/CyclesPage.css';
 import '../../../../stylesheets/buttons.css';
@@ -12,7 +11,9 @@ const CyclesPage = () => {
   const { cycles } = useSelector(state => state);
   const { url } = useRouteMatch();
   const [showEditButtons, setShowEditButtons] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const dispatch = useDispatch();
 
   const toggleEditMode = e => {
     e.preventDefault();
@@ -21,7 +22,18 @@ const CyclesPage = () => {
 
   const handleCreate = e => {
     e.preventDefault();
-    setShowModal(true);
+    setShowCreateModal(true);
+  }
+
+  const handleDelete = (e, cycleId) => {
+    e.preventDefault();
+    dispatch(deleteCycle(cycleId));
+  }
+
+  const toggleEditModal = e => {
+    e.stopPropagation();
+    e.preventDefault();
+    setShowEditModal(true);
   }
 
   return (
@@ -39,14 +51,29 @@ const CyclesPage = () => {
         cycles?.map(cycle => {
           return (
             <NavLink to={`${url}/${cycle.id}/routines`} className='card' key={cycle.id}>
-              <Card name={'cycle'} item={cycle} showEditButtons={showEditButtons} Form={CycleForm} deleteDispatcher={deleteCycle}/>
+              <>
+                <div className='card-name'>
+                  {cycle.name}
+                </div>
+                {showEditButtons &&
+                  <>
+                    <div className='card-button-container'>
+                      <button className='edit-btn btn' onClick={toggleEditModal}>Edit</button>
+                      <button className='delete-btn btn' onClick={e => handleDelete(e, cycle.id)}>Delete</button>
+                    </div>
+                    <Modal title={`Edit Cycle`} onClose={() => setShowEditModal(false)} show={showEditModal} >
+                      <CycleForm setShowModal={setShowEditModal} method='PATCH' cycleId={cycle.id} component='Cycle'/>
+                    </Modal>
+                  </>
+                }
+              </>
             </NavLink>
           )
         })
       }
     </div>
-    <Modal title={`Create a Cycle`} onClose={() => setShowModal(false)} show={showModal}>
-      <CycleForm setShowModal={setShowModal} method='POST' component='Cycle'/>
+    <Modal title={`Create a Cycle`} onClose={() => setShowCreateModal(false)} show={showCreateModal}>
+      <CycleForm setShowModal={setShowCreateModal} method='POST' component='Cycle'/>
     </Modal>
   </div>
   )

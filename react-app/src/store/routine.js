@@ -59,6 +59,7 @@ export const deleteRoutine = (routineId, cycleId) => async dispatch => {
 
   if (response.ok) {
     const data = await response.json();
+    console.log(routineId, cycleId, 'thunk');
     dispatch(delete_routine(routineId, cycleId));
     return data;
   }

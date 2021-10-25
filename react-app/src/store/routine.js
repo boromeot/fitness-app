@@ -44,7 +44,7 @@ export const postRoutine = (name, userId, cycleId) => async dispatch => {
 }
 
 export const deleteRoutine = (routineId) => async dispatch => {
-  const resposne = await fetch(`/api/routines/${routineId}`, {
+  const response = await fetch(`/api/routines/${routineId}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
@@ -54,9 +54,9 @@ export const deleteRoutine = (routineId) => async dispatch => {
     })
   });
 
-  if (reponse.ok) {
-    const data = await reponse.json();
-    dispatch(delete_cycle(cycleId));
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(delete_routine(routineId));
     return data;
   }
 }

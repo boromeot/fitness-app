@@ -1,4 +1,4 @@
-import { POST_ROUTINE } from "./routine";
+import { POST_ROUTINE, DELETE_ROUTINE } from "./routine";
 
 const GET_CYCLES = 'cycles/getCycles';
 const POST_CYCLE = 'cycles/postCycle';
@@ -108,6 +108,7 @@ export const patchCycle = (name, userId, cycleId) => async dispatch => {
 
 export default function cycles(state = [], action) {
   let newState;
+  let i;
   switch (action.type) {
     case GET_CYCLES:
       newState = action.payload;
@@ -123,14 +124,21 @@ export default function cycles(state = [], action) {
       return newState;
     case PATCH_CYCLE:
       newState = [...state];
-      const i = newState.findIndex(cycle => cycle.id === action.payload.id);
+      i = newState.findIndex(cycle => cycle.id === action.payload.id);
       newState[i].name = action.payload.name;
       return newState;
 
     case POST_ROUTINE:
       newState = [...state];
-      const j = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
-      newState[j].routines.push(action.payload.routine);
+      i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
+      newState[i].routines.push(action.payload.routine);
+      return newState;
+    case DELETE_ROUTINE:
+      newState = [...state];
+      i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
+      newState[i].routines = newState[i].routines.filter(routine => {
+        return routine.id !== action.payload;
+      });
       return newState;
     default:
     return state;

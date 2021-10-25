@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from app.api.auth_routes import login
 from app.forms.routine_form import RoutineForm
 from flask_login import login_required, current_user
-from app.models import Routine, cycle, db
+from app.models import Routine, db
 
 
 routine_routes = Blueprint('routines', __name__)
@@ -51,3 +51,20 @@ def delete_routine(id):
     return {'message': 'Successfully deleted routine'}
   else:
     return {'errors': ['Unathorized']}
+
+
+@routine_routes.route('/<int:id>', methods=['PATCH'])
+@login_required
+def patch_rotuine(id):
+  form = RoutineForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    routine = Routine.query.get(id)
+    if current_user.id == routine.user_id:
+      routine.name = form.data['name']
+      db.session.commit()
+      return routine.to_dict()
+    else:
+      return {'errors': ['Unathorized']}
+  else:
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401

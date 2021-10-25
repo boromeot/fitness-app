@@ -16,7 +16,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 #Get all routines by cycle Id
-@routine_routes.route('/<int:cycleId>', methods=['GET'])
+@routine_routes.route('/cycles/<int:cycleId>', methods=['GET'])
 @login_required
 def get_routines(cycleId):
   routines = Routine.query.filter(Routine.cycle_id == cycleId)

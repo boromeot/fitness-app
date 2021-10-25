@@ -16,5 +16,5 @@ class Cycle(db.Model):
     return {
       'id': self.id,
       'name': self.name,
-      'routines': self.routines
+      'routines': [routine.to_dict() for routine in self.routines]
     }

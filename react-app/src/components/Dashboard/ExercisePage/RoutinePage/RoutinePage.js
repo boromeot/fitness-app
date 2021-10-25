@@ -1,11 +1,17 @@
 import React from 'react';
-// import { useParams } from 'react-router';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 import PageTemplate from '../../templates/PageTemplate';
 
 const RoutinePage = () => {
-  // const { cycleId } = useParams();
+  const { cycleId } = useParams();
+  const { routines } = useSelector(state => state.cycles.find(cycle => cycle.id === +cycleId));
+
+  console.log(routines, 'routines');
   return (
-    <PageTemplate data={[]} path='temp' name='routine'/>
+    <>
+      {routines[0]?.name}
+    </>
   )
 }
 

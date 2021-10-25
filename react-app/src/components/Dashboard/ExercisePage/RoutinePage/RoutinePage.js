@@ -7,14 +7,14 @@ import RoutineForm from './RoutineForm';
 
 const RoutinePage = () => {
   const { cycleId } = useParams();
-  const { routines } = useSelector(state => state.cycles.find(cycle => cycle.id === +cycleId));
+  const { cycles } = useSelector(state => state);
   const { url } = useRouteMatch();
   const [showEditButtons, setShowEditButtons] = useState(false);
-
+  const currentCycle = cycles.find(cycle => cycle.id === +cycleId);
   return (
-    <PageTemplate name='routine' form={RoutineForm} setShowEditButtons={setShowEditButtons}>
+    <PageTemplate name='routine' Form={RoutineForm} setShowEditButtons={setShowEditButtons} cycleId={+cycleId}>
       {
-        routines?.map(routine => {
+        currentCycle.routines?.map(routine => {
           return (
             <NavLink to={`${url}/${routine.id}`} className='card' key={routine.id}>
               <Card name='routine' item={routine} showEditButtons={showEditButtons} Form={RoutineForm} deleteDispatcher={null}/>

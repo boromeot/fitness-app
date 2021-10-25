@@ -3,7 +3,7 @@ import Modal from "../../Modal/Modal";
 import './CyclesPage.css';
 import '../../../stylesheets/buttons.css';
 
-const PageTemplate = ({ Form, name, children, setShowEditButtons}) => {
+const PageTemplate = ({ Form, name, children, setShowEditButtons, cycleId}) => {
   const [showModal, setShowModal] = useState(false);
 
   const toggleEditMode = e => {
@@ -30,7 +30,7 @@ const PageTemplate = ({ Form, name, children, setShowEditButtons}) => {
         {children}
       </div>
       <Modal title={`Create a ${name}`} onClose={() => setShowModal(false)} show={showModal}>
-        <Form setShowModal={setShowModal} method='POST' component={name}/>
+        <Form setShowModal={setShowModal} method='POST' component={name} cycleId={cycleId}/>
       </Modal>
     </div>
   )

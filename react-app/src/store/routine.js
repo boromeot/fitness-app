@@ -1,12 +1,4 @@
-const GET_ROUTINES = 'routine/getRoutine';
 export const POST_ROUTINE = 'routine/postRoutine';
-
-const get_routines = (routineArr) => {
-  return {
-    type: GET_ROUTINES,
-    payload: routineArr
-  };
-}
 
 const post_routine = (routine, cycleId) => {
   return {
@@ -28,7 +20,8 @@ export const postRoutine = (name, userId, cycleId) => async dispatch => {
     },
     body: JSON.stringify({
       name,
-      user_id: userId
+      user_id: userId,
+      cycle_id: cycleId
     })
   });
   if (response.ok) {
@@ -40,9 +33,4 @@ export const postRoutine = (name, userId, cycleId) => async dispatch => {
     const data = await response.json();
     return data;
   }
-}
-
-//Get routines by cycle id
-export const getRoutines = (cycleId) => async dispatch => {
-
 }

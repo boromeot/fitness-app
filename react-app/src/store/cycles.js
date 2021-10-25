@@ -120,7 +120,6 @@ export default function cycles(state = [], action) {
       newState = state.filter(cycle => {
         return cycle.id !== action.payload;
       });
-      console.log(newState,'newstate');
       return newState;
     case PATCH_CYCLE:
       newState = [...state];
@@ -131,9 +130,9 @@ export default function cycles(state = [], action) {
     case POST_ROUTINE:
       newState = [...state];
       const j = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
-      newState[j].append(action.payload.routine);
+      newState[j].routines.push(action.payload.routine);
       return newState;
-      default:
-      return state;
+    default:
+    return state;
   }
 }

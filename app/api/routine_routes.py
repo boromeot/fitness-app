@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from app.forms.routine_form import RoutineForm
 from flask_login import login_required, current_user
-from app.models import Routine, db
+from app.models import Routine, cycle, db
 
 
 routine_routes = Blueprint('routines', __name__)
@@ -32,7 +32,8 @@ def post_routine():
   if form.validate_on_submit():
     routine = Routine(
       name = form.data['name'],
-      user_id = form.data['user_id']
+      user_id = form.data['user_id'],
+      cycle_id = form.data['cycle_id']
     )
     db.session.add(routine)
     db.session.commit()

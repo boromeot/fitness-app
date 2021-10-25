@@ -5,6 +5,8 @@ import { deleteCycle } from "../../../../store/cycles";
 import { NavLink, useRouteMatch } from 'react-router-dom';
 import Card from "../../templates/Card";
 import Modal from "../../../Modal/Modal";
+import '../../templates/CyclesPage.css';
+import '../../../../stylesheets/buttons.css';
 
 const CyclesPage = () => {
   const { cycles } = useSelector(state => state);

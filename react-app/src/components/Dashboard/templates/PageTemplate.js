@@ -3,7 +3,7 @@ import Modal from "../../Modal/Modal";
 import './CyclesPage.css';
 import '../../../stylesheets/buttons.css';
 
-const PageWrapper = ({ name, Form, children, setShowEditButtons}) => {
+const PageTemplate = ({ Form, name, children, setShowEditButtons}) => {
   const [showModal, setShowModal] = useState(false);
 
   const toggleEditMode = e => {
@@ -36,4 +36,4 @@ const PageWrapper = ({ name, Form, children, setShowEditButtons}) => {
   )
 }
 
-export default PageWrapper;
+export default PageTemplate;

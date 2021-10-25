@@ -65,7 +65,7 @@ const RoutinePage = () => {
                       <button className='delete-btn btn' onClick={e => handleDelete(e, routine.id, cycleId)}>Delete</button>
                     </div>
                     <Modal title={`Edit Routine`} onClose={() => setShowEditModal(false)} show={showEditModal} >
-                      <RoutineForm setShowModal={setShowEditModal} method='PATCH' cycleId={routine.id} component='name'/>
+                      <RoutineForm setShowModal={setShowEditModal} method='PATCH' cycleId={routine.id} component='name' routineId={routine.id}/>
                     </Modal>
                   </>
                 }

@@ -73,7 +73,7 @@ export const deleteRoutine = (routineId, cycleId) => async dispatch => {
   }
 }
 
-export const patchRoutine = (name, userId, routineId) => async dispatch => {
+export const patchRoutine = (name, userId, cycleId, routineId) => async dispatch => {
   const response = await fetch(`/api/routines/${routineId}`, {
     method: 'PATCH',
     headers: {
@@ -81,7 +81,8 @@ export const patchRoutine = (name, userId, routineId) => async dispatch => {
     },
     body: JSON.stringify({
       name,
-      user_id: userId
+      user_id: userId,
+      cycle_id: cycleId
     })
   });
   if (response.ok) {

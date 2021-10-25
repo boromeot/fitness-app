@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from app.api.auth_routes import login
 from app.forms.routine_form import RoutineForm
 from flask_login import login_required, current_user
 from app.models import Routine, cycle, db
@@ -39,3 +40,14 @@ def post_routine():
     db.session.commit()
     return routine.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@routine_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_routine(id):
+  routine = Routine.query.get(id)
+  if current_user.id == routine.user_id:
+    db.session.delete(routine)
+    db.session.commit()
+    return {'message': 'Successfully deleted routine'}
+  else:
+    return {'errors': ['Unathorized']}

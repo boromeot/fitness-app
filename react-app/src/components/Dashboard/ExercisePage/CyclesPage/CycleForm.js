@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { patchCycle, postCycle } from "../../../../store/cycles";
 import './CycleForm.css';
 
-const CycleForm = ({ setShowModal, method, cycleId }) => {
+const CycleForm = ({ setShowModal, method, cycleId, component }) => {
   const dispatch = useDispatch();
   const { id:userId } = useSelector(state => state.session.user);
   const [name, setName] = useState('');
@@ -38,7 +38,7 @@ const CycleForm = ({ setShowModal, method, cycleId }) => {
       <div>
         <input
           name='name'
-          placeholder='Cycle name'
+          placeholder={`${component} name`}
           value={name}
           onChange={handleChange}
           className='form-input cycle-form-input'

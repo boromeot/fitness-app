@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, useRouteMatch, Route } from "react-router-dom";
 import Modal from "../../../Modal/Modal";
 import RoutineForm from "../RoutinesPage/RoutineForm";
 import './RoutinePage.css';
 
 const RoutinePage = () => {
   const { userId, cycleId, routineId } = useParams();
+  const { path, url } = useRouteMatch();
   const [showCreateModal, setShowCreateModal] = useState(false);
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -29,10 +30,14 @@ const RoutinePage = () => {
       <div className='routine-page-days-container'>
         {
           days.map((day, i) => {
-            return <NavLink to='#' className='routine-page-day' key={i}>{day}</NavLink>
+            return <NavLink to={`${url}/${day}`} className='routine-page-day' key={i}>{day}</NavLink>
           })
         }
       </div>
+      <Route path={`${path}/:day`}>
+        useParams
+      </Route>
+
       <Modal title={`Create a Routine`} onClose={() => setShowCreateModal(false)} show={showCreateModal}>
         <RoutineForm setShowModal={setShowCreateModal} method='POST' cycleId={cycleId}/>
       </Modal>

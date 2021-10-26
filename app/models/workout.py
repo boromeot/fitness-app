@@ -19,5 +19,5 @@ class Workout(db.Model):
     return {
       'id': self.id,
       'day': self.day,
-      'exercises': self.exercises
+      'exercises': [exercise.to_dict() for exercise in self.exercises]
     }

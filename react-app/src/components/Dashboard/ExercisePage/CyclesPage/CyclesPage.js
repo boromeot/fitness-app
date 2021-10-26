@@ -34,7 +34,7 @@ const CyclesPage = () => {
         Edit mode
       </button>
     </div>
-    <div className='card-conatiner'>
+    <div className='card-container'>
       {
         cycles?.map(cycle => {
           return (

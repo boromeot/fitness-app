@@ -42,7 +42,7 @@ const RoutinesPage = () => {
         Back
       </NavLink>
     </div>
-    <div className='card-conatiner'>
+    <div className='card-container'>
       {
         currentCycle.routines?.map(routine => {
           return (

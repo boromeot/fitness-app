@@ -2,13 +2,19 @@ import React, { useState } from "react";
 import { useParams, NavLink, useRouteMatch, Route } from "react-router-dom";
 import Modal from "../../../Modal/Modal";
 import RoutineForm from "../RoutinesPage/RoutineForm";
+import DayPage from "./DayPage";
 import './RoutinePage.css';
+
+
+const capitalize = (word) => {
+  return `${word[0].toLocaleUpperCase()}${word.slice(1)}`;
+}
 
 const RoutinePage = () => {
   const { userId, cycleId, routineId } = useParams();
   const { path, url } = useRouteMatch();
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
   const handleCreate = e => {
     e.preventDefault();
@@ -30,12 +36,12 @@ const RoutinePage = () => {
       <div className='routine-page-days-container'>
         {
           days.map((day, i) => {
-            return <NavLink to={`${url}/${day}`} className='routine-page-day' key={i}>{day}</NavLink>
+            return <NavLink to={`${url}/${day}`} className='routine-page-day' key={i}>{capitalize(day)}</NavLink>
           })
         }
       </div>
       <Route path={`${path}/:day`}>
-        
+        <DayPage />
       </Route>
 
       <Modal title={`Create a Routine`} onClose={() => setShowCreateModal(false)} show={showCreateModal}>

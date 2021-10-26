@@ -1,26 +1,13 @@
-import React, { useState } from 'react';
-import { useParams, NavLink, useRouteMatch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import Modal from '../../../Modal/Modal';
-import RoutineCard from './RoutineCard';
-import RoutineForm from './RoutineForm';
-import '../../stylesheets/SubPage.css';
-import '../../../../stylesheets/buttons.css';
-import '../../stylesheets/Form.css';
-
+import React, { useState } from "react";
+import { useParams, NavLink } from "react-router-dom";
+import Modal from "../../../Modal/Modal";
+import RoutineForm from "../RoutinesPage/RoutineForm";
+import './RoutinePage.css';
 
 const RoutinePage = () => {
-  const { userId, cycleId } = useParams();
-  const { cycles } = useSelector(state => state);
-  const { url } = useRouteMatch();
-  const [showEditButtons, setShowEditButtons] = useState(false);
-  const currentCycle = cycles.find(cycle => cycle.id === +cycleId);
+  const { userId, cycleId, routineId } = useParams();
   const [showCreateModal, setShowCreateModal] = useState(false);
-
-  const toggleEditMode = e => {
-    e.preventDefault();
-    setShowEditButtons(prev => !prev);
-  }
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
   const handleCreate = e => {
     e.preventDefault();
@@ -29,39 +16,27 @@ const RoutinePage = () => {
 
   return (
     <div className='page-template-container'>
-    <div className='page-template-button-container'>
-      <div className='page-template-edit-delete-container'>
-        <button className='page-template-edit edit-btn btn' onClick={toggleEditMode}>
-          Edit mode
-        </button>
-        <button className='page-template-create primary-btn btn' onClick={handleCreate}>
-          {`Create new Routine`}
-        </button>
+      <div className='page-template-button-container'>
+        <div className='page-template-edit-delete-container'>
+          <button className='page-template-create primary-btn btn' onClick={handleCreate}>
+            {`Create new Routine`}
+          </button>
+        </div>
+        <NavLink to={`/users/${userId}/dashboard/exercise/cycles/${cycleId}/routines`} className='back-btn btn'>
+          Back
+        </NavLink>
       </div>
-      <NavLink to={`/users/${userId}/dashboard/exercise/cycles`} className='back-btn btn'>
-        Back
-      </NavLink>
+      <div className='routine-page-days-container'>
+        {
+          days.map((day, i) => {
+            return <div className='routine-page-day' key={i}>{day}</div>
+          })
+        }
+      </div>
+      <Modal title={`Create a Routine`} onClose={() => setShowCreateModal(false)} show={showCreateModal}>
+        <RoutineForm setShowModal={setShowCreateModal} method='POST' cycleId={cycleId}/>
+      </Modal>
     </div>
-    <div className='card-conatiner'>
-      {
-        currentCycle.routines?.map(routine => {
-          return (
-            <NavLink to={`${url}/${routine.id}`} className='card' key={routine.id}>
-              <RoutineCard
-                routine={routine}
-                showEditButtons={showEditButtons}
-                cycleId={+cycleId}
-                routineId={routine.id}
-              />
-            </NavLink>
-          )
-        })
-      }
-    </div>
-    <Modal title={`Create a Routine`} onClose={() => setShowCreateModal(false)} show={showCreateModal}>
-      <RoutineForm setShowModal={setShowCreateModal} method='POST' cycleId={cycleId}/>
-    </Modal>
-  </div>
   )
 }
 

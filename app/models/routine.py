@@ -18,5 +18,5 @@ class Routine(db.Model):
     return {
       'id': self.id,
       'name': self.name,
-      'workouts': self.workouts
+      'workouts': [workout.to_dict() for workout in self.workouts]
     }

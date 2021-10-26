@@ -1,9 +1,16 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 import './LandingPage.css';
 import './about-links.css';
 
 const LandingPage = () => {
+  const user = useSelector(state => state.session.user);
+
+  if (user) {
+    return <Redirect to={`/users/${user.id}/dashboard`} />;
+  }
+
   return (
     <div className='landing-page-container'>
         <img className='landing-page-logo' src='https://i.imgur.com/awqVsCJ.png' alt='' />

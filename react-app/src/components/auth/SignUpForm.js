@@ -20,6 +20,8 @@ const SignUpForm = () => {
       if (data) {
         setErrors(data)
       }
+    } else {
+      setErrors(['The two passwords do not match']);
     }
   };
 
@@ -40,17 +42,17 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to={`/users/${user.id}/dashboard`} />;
   }
 
   return (
    <div className='form-container'>
     <div className='form-logo-container' >
-      <img src='https://i.imgur.com/70MGKx1.png' alt=''/>
+      <img src='https://i.imgur.com/70MGKx1.png' alt='wolf logo'/>
     </div>
     <form onSubmit={onSignUp} className='form-card'>
         <h2 className='form-heading'>Sign up</h2>
-        <div>
+        <div className='form-error'>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}

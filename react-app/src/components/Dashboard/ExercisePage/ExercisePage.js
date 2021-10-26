@@ -13,9 +13,12 @@ const ExercisePage = () => {
 
   //Most children components rely on the information this dispatch fetches
   //So we must wait for its response before doing anything
-  useEffect(async () => {
-    await dispatch(getCycles(userId));
-    setLoaded(true);
+  useEffect( () => {
+    (async() => {
+      await dispatch(getCycles(userId));
+      setLoaded(true);
+    })();
+
   }, [dispatch, userId])
 
   if (!loaded) {

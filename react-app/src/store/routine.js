@@ -22,10 +22,14 @@ const delete_routine = (routineId, cycleId) => {
   };
 }
 
-const patch_routine = (routine) => {
+const patch_routine = (routine, cycleId, routineId) => {
   return {
     type: PATCH_ROUTINE,
-    payload: routine
+    payload: {
+      routine,
+      cycleId,
+      routineId
+    }
   };
 }
 
@@ -87,7 +91,7 @@ export const patchRoutine = (name, userId, cycleId, routineId) => async dispatch
   });
   if (response.ok) {
     const routine = await response.json();
-    dispatch(patch_routine(routine));
+    dispatch(patch_routine(routine, cycleId, routineId));
     return routine;
   } else {
     const data = await response.json();

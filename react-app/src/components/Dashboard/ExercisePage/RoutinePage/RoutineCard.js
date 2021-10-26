@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import Modal from "../../Modal/Modal";
+import Modal from "../../../Modal/Modal";
+import RoutineForm from "./RoutineForm";
+import { deleteRoutine } from "../../../../store/routine";
 
-const Card = ({ item, showEditButtons, name, Form, deleteDispatcher }) => {
+const RoutineCard = ({ routine, showEditButtons, cycleId, routineId}) => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
 
   const handleDelete = (e, cycleId) => {
     e.preventDefault();
-    dispatch(deleteDispatcher(cycleId));
+    dispatch(deleteRoutine(routineId, cycleId));
   }
 
   const toggleEditModal = e => {
@@ -20,16 +22,16 @@ const Card = ({ item, showEditButtons, name, Form, deleteDispatcher }) => {
   return (
     <>
       <div className='card-name'>
-        {item.name}
+        {routine.name}
       </div>
       {showEditButtons &&
         <>
           <div className='card-button-container'>
             <button className='edit-btn btn' onClick={toggleEditModal}>Edit</button>
-            <button className='delete-btn btn' onClick={e => handleDelete(e, item.id)}>Delete</button>
+            <button className='delete-btn btn' onClick={e => handleDelete(e, cycleId)}>Delete</button>
           </div>
-          <Modal title={`Edit ${name}`} onClose={() => setShowModal(false)} show={showModal} >
-            <Form setShowModal={setShowModal} method='PATCH' cycleId={item.id} component={name}/>
+          <Modal title='Edit Routine' onClose={() => setShowModal(false)} show={showModal} >
+            <RoutineForm setShowModal={setShowModal} method='PATCH' cycleId={cycleId} routineId={routineId}/>
           </Modal>
         </>
       }
@@ -37,4 +39,4 @@ const Card = ({ item, showEditButtons, name, Form, deleteDispatcher }) => {
   )
 }
 
-export default Card;
+export default RoutineCard;

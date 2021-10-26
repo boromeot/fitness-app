@@ -1,4 +1,4 @@
-import { POST_ROUTINE, DELETE_ROUTINE } from "./routine";
+import { POST_ROUTINE, DELETE_ROUTINE, PATCH_ROUTINE } from "./routine";
 
 const GET_CYCLES = 'cycles/getCycles';
 const POST_CYCLE = 'cycles/postCycle';
@@ -140,6 +140,12 @@ export default function cycles(state = [], action) {
       newState[i].routines = newState[i].routines.filter(routine => {
         return routine.id !== action.payload.routineId;
       });
+      return newState;
+    case PATCH_ROUTINE:
+      newState = [...state];
+      i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
+      let j = newState[i].routines.findIndex(routine => routine.id === action.payload.routineId);
+      newState[i].routines[j].name = action.payload.routine.name;
       return newState;
     default:
     return state;

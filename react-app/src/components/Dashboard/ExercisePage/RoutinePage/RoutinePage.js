@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { useParams, NavLink, useRouteMatch } from 'react-router-dom';
-import { deleteRoutine } from '../../../../store/routine';
+import { useSelector } from 'react-redux';
 import Modal from '../../../Modal/Modal';
+import RoutineCard from './RoutineCard';
 import RoutineForm from './RoutineForm';
-import '../../templates/CyclesPage.css';
+import '../../stylesheets/SubPage.css';
 import '../../../../stylesheets/buttons.css';
+import '../../stylesheets/Form.css';
 
 
 const RoutinePage = () => {
@@ -15,8 +16,6 @@ const RoutinePage = () => {
   const [showEditButtons, setShowEditButtons] = useState(false);
   const currentCycle = cycles.find(cycle => cycle.id === +cycleId);
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const dispatch = useDispatch();
 
   const toggleEditMode = e => {
     e.preventDefault();
@@ -26,17 +25,6 @@ const RoutinePage = () => {
   const handleCreate = e => {
     e.preventDefault();
     setShowCreateModal(true);
-  }
-
-  const toggleEditModal = e => {
-    e.stopPropagation();
-    e.preventDefault();
-    setShowEditModal(true);
-  }
-
-  const handleDelete = (e, routineId, cycleId) => {
-    e.preventDefault();
-    dispatch(deleteRoutine(routineId, +cycleId));
   }
 
   return (
@@ -54,29 +42,19 @@ const RoutinePage = () => {
         currentCycle.routines?.map(routine => {
           return (
             <NavLink to={`${url}/${routine.id}`} className='card' key={routine.id}>
-              <>
-                <div className='card-name'>
-                  {routine.name}
-                </div>
-                {showEditButtons &&
-                  <>
-                    <div className='card-button-container'>
-                      <button className='edit-btn btn' onClick={toggleEditModal}>Edit</button>
-                      <button className='delete-btn btn' onClick={e => handleDelete(e, routine.id, cycleId)}>Delete</button>
-                    </div>
-                    <Modal title={`Edit Routine`} onClose={() => setShowEditModal(false)} show={showEditModal} >
-                      <RoutineForm setShowModal={setShowEditModal} method='PATCH' cycleId={routine.id} component='name' routineId={routine.id}/>
-                    </Modal>
-                  </>
-                }
-              </>
+              <RoutineCard
+                routine={routine}
+                showEditButtons={showEditButtons}
+                cycleId={+cycleId}
+                routineId={routine.id}
+              />
             </NavLink>
           )
         })
       }
     </div>
     <Modal title={`Create a Routine`} onClose={() => setShowCreateModal(false)} show={showCreateModal}>
-      <RoutineForm setShowModal={setShowCreateModal} method='POST' component='Routine' cycleId={cycleId}/>
+      <RoutineForm setShowModal={setShowCreateModal} method='POST' cycleId={cycleId}/>
     </Modal>
   </div>
   )

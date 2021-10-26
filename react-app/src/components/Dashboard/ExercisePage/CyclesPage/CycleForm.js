@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { patchCycle, postCycle } from "../../../../store/cycles";
-import './CycleForm.css';
 
-const CycleForm = ({ setShowModal, method, cycleId, component }) => {
+const CycleForm = ({ setShowModal, method, cycleId }) => {
   const dispatch = useDispatch();
   const { id:userId } = useSelector(state => state.session.user);
   const [name, setName] = useState('');
@@ -31,17 +30,17 @@ const CycleForm = ({ setShowModal, method, cycleId, component }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='form-container cycle-form-container'>
+    <form onSubmit={handleSubmit} className='form-container exercise-page-form-container'>
       {errors[0] &&
-        <div className='form-error cycle-form-error'>{errors[0]}</div>
+        <div className='form-error exercise-page-form-error'>{errors[0]}</div>
       }
       <div>
         <input
           name='name'
-          placeholder={`${component} name`}
+          placeholder='Cycle name'
           value={name}
           onChange={handleChange}
-          className='form-input cycle-form-input'
+          className='form-input exercise-page-form-input'
         />
       </div>
       <button className='primary-btn btn' type='submit'>Submit</button>

@@ -35,7 +35,7 @@ const RoutinePage = () => {
         }
       </div>
       <Route path={`${path}/:day`}>
-        useParams
+        
       </Route>
 
       <Modal title={`Create a Routine`} onClose={() => setShowCreateModal(false)} show={showCreateModal}>

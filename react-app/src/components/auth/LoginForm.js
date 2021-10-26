@@ -19,6 +19,14 @@ const LoginForm = () => {
     }
   };
 
+  const demoLogin = async e => {
+    e.preventDefault();
+    const data = await dispatch(login('demo@aa.io', 'password'));
+    if (data) {
+      setErrors(data);
+    }
+  };
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -28,7 +36,7 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to={`/users/${user.id}/dashboard`} />;
   }
 
   return (
@@ -73,6 +81,9 @@ const LoginForm = () => {
             New here?&nbsp;
             <NavLink to='/sign-up' >Sign up</NavLink>
         </div>
+        <button onClick={demoLogin} className='btn'>
+          Demo login
+        </button>
       </form>
     </div>
   );

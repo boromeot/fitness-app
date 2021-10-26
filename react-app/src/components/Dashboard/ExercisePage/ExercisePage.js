@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Route, useRouteMatch } from "react-router";
-import CyclesPage from "./CyclesPage/CyclesPage";
+import { Route, useRouteMatch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCycles } from "../../../store/cycles";
+import CyclesPage from "./CyclesPage/CyclesPage";
+import RoutinesPage from "./RoutinesPage/RoutinesPage";
 import RoutinePage from "./RoutinePage/RoutinePage";
+import { getCycles } from "../../../store/cycles";
 
 const ExercisePage = () => {
   const { path } = useRouteMatch();
@@ -30,7 +31,10 @@ const ExercisePage = () => {
       <Route path={`${path}/cycles`} exact>
         <CyclesPage />
       </Route>
-      <Route path={`${path}/cycles/:cycleId/routines`} >
+      <Route path={`${path}/cycles/:cycleId/routines`} exact>
+        <RoutinesPage />
+      </Route>
+      <Route path={`${path}/cycles/:cycleId/routines/:routineId`}>
         <RoutinePage />
       </Route>
       <Route path={`${path}/routines`} exact>

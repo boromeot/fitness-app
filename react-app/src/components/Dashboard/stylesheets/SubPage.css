@@ -5,8 +5,13 @@
 
 .page-template-button-container {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: row-reverse;
 }
+
+.page-template-edit-delete-container {
+  margin-left: auto;
+}
+
 .page-template-create, .page-template-edit {
   margin-left: 1rem;
 }

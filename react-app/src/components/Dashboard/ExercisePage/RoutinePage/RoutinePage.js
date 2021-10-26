@@ -10,7 +10,7 @@ import '../../stylesheets/Form.css';
 
 
 const RoutinePage = () => {
-  const { cycleId } = useParams();
+  const { userId, cycleId } = useParams();
   const { cycles } = useSelector(state => state);
   const { url } = useRouteMatch();
   const [showEditButtons, setShowEditButtons] = useState(false);
@@ -30,12 +30,17 @@ const RoutinePage = () => {
   return (
     <div className='page-template-container'>
     <div className='page-template-button-container'>
-      <button className='page-template-edit edit-btn btn' onClick={toggleEditMode}>
-        Edit mode
-      </button>
-      <button className='page-template-create primary-btn btn' onClick={handleCreate}>
-        {`Create new Routine`}
-      </button>
+      <div className='page-template-edit-delete-container'>
+        <button className='page-template-edit edit-btn btn' onClick={toggleEditMode}>
+          Edit mode
+        </button>
+        <button className='page-template-create primary-btn btn' onClick={handleCreate}>
+          {`Create new Routine`}
+        </button>
+      </div>
+      <NavLink to={`/users/${userId}/dashboard/exercise/cycles`} className='back-btn btn'>
+        Back
+      </NavLink>
     </div>
     <div className='card-conatiner'>
       {

@@ -29,7 +29,7 @@ const RoutinePage = () => {
       <div className='routine-page-days-container'>
         {
           days.map((day, i) => {
-            return <div className='routine-page-day' key={i}>{day}</div>
+            return <NavLink to='#' className='routine-page-day' key={i}>{day}</NavLink>
           })
         }
       </div>

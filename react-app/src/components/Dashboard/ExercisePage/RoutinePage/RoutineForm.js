@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { patchCycle, postCycle } from "../../../../store/cycles";
+import { patchRoutine, postRoutine } from "../../../../store/routine";
 
-const CycleForm = ({ setShowModal, method, cycleId }) => {
+const RoutineForm = ({ setShowModal, method, cycleId, routineId }) => {
   const dispatch = useDispatch();
   const { id:userId } = useSelector(state => state.session.user);
   const [name, setName] = useState('');
@@ -10,12 +10,11 @@ const CycleForm = ({ setShowModal, method, cycleId }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    setErrors([]);
     let data;
     if (method === 'POST') {
-      data = await dispatch(postCycle(name, userId))
+      data = await dispatch(postRoutine(name, userId, +cycleId));
     } else if (method === 'PATCH') {
-      data = await dispatch(patchCycle(name, userId, cycleId))
+      data = await dispatch(patchRoutine(name, userId, +cycleId, routineId));
     }
     if (data.errors) {
       setErrors(data.errors);
@@ -25,7 +24,6 @@ const CycleForm = ({ setShowModal, method, cycleId }) => {
   }
 
   const handleChange = e => {
-    e.preventDefault();
     setName(e.target.value);
   }
 
@@ -37,7 +35,7 @@ const CycleForm = ({ setShowModal, method, cycleId }) => {
       <div>
         <input
           name='name'
-          placeholder='Cycle name'
+          placeholder='Routine name'
           value={name}
           onChange={handleChange}
           className='form-input exercise-page-form-input'
@@ -48,4 +46,4 @@ const CycleForm = ({ setShowModal, method, cycleId }) => {
   )
 }
 
-export default CycleForm;
+export default RoutineForm;

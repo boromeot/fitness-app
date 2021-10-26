@@ -1,3 +1,5 @@
+import { POST_ROUTINE, DELETE_ROUTINE, PATCH_ROUTINE } from "./routine";
+
 const GET_CYCLES = 'cycles/getCycles';
 const POST_CYCLE = 'cycles/postCycle';
 const DELETE_CYCLE = 'cycles/deleteCycle';
@@ -31,26 +33,6 @@ const patch_cycle = (cycle) => {
   };
 }
 
-export const patchCycle = (name, userId, cycleId) => async dispatch => {
-  const response = await fetch(`/api/cycles/${cycleId}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name,
-      user_id: userId
-    })
-  });
-  if (response.ok) {
-    const cycle = await response.json();
-    dispatch(patch_cycle(cycle));
-    return cycle;
-  } else {
-    const data = await response.json();
-    return data;
-  }
-}
 
 export const getCycles = (userId) => async dispatch => {
   const response = await fetch(`/api/cycles/${userId}`);
@@ -103,8 +85,30 @@ export const deleteCycle = (cycleId) => async dispatch => {
 }
 
 
+export const patchCycle = (name, userId, cycleId) => async dispatch => {
+  const response = await fetch(`/api/cycles/${cycleId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name,
+      user_id: userId
+    })
+  });
+  if (response.ok) {
+    const cycle = await response.json();
+    dispatch(patch_cycle(cycle));
+    return cycle;
+  } else {
+    const data = await response.json();
+    return data;
+  }
+}
+
 export default function cycles(state = [], action) {
   let newState;
+  let i;
   switch (action.type) {
     case GET_CYCLES:
       newState = action.payload;
@@ -117,14 +121,33 @@ export default function cycles(state = [], action) {
       newState = state.filter(cycle => {
         return cycle.id !== action.payload;
       });
-      console.log(newState,'newstate');
       return newState;
     case PATCH_CYCLE:
       newState = [...state];
-      const i = newState.findIndex(cycle => cycle.id === action.payload.id);
+      i = newState.findIndex(cycle => cycle.id === action.payload.id);
       newState[i].name = action.payload.name;
       return newState;
+
+    case POST_ROUTINE:
+      newState = [...state];
+      console.log(action);
+      i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
+      newState[i].routines.push(action.payload.routine);
+      return newState;
+    case DELETE_ROUTINE:
+      newState = [...state];
+      i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
+      newState[i].routines = newState[i].routines.filter(routine => {
+        return routine.id !== action.payload.routineId;
+      });
+      return newState;
+    case PATCH_ROUTINE:
+      newState = [...state];
+      i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
+      let j = newState[i].routines.findIndex(routine => routine.id === action.payload.routineId);
+      newState[i].routines[j].name = action.payload.routine.name;
+      return newState;
     default:
-      return state;
+    return state;
   }
 }

@@ -1,17 +1,20 @@
-import React, { useState } from "react";
-import { NavLink, useRouteMatch } from 'react-router-dom';
-import { useSelector } from "react-redux";
-import Modal from "../../../Modal/Modal";
-import CycleCard from "./CycleCard";
-import CycleForm from "./CycleForm";
+import React, { useState } from 'react';
+import { useParams, NavLink, useRouteMatch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Modal from '../../../Modal/Modal';
+import RoutineCard from './RoutineCard';
+import RoutineForm from './RoutineForm';
 import '../../stylesheets/SubPage.css';
 import '../../../../stylesheets/buttons.css';
 import '../../stylesheets/Form.css';
 
-const CyclesPage = () => {
+
+const RoutinePage = () => {
+  const { cycleId } = useParams();
   const { cycles } = useSelector(state => state);
   const { url } = useRouteMatch();
   const [showEditButtons, setShowEditButtons] = useState(false);
+  const currentCycle = cycles.find(cycle => cycle.id === +cycleId);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   const toggleEditMode = e => {
@@ -31,28 +34,30 @@ const CyclesPage = () => {
         Edit mode
       </button>
       <button className='page-template-create primary-btn btn' onClick={handleCreate}>
-        {`Create new Cycle`}
+        {`Create new Routine`}
       </button>
     </div>
     <div className='card-conatiner'>
       {
-        cycles?.map(cycle => {
+        currentCycle.routines?.map(routine => {
           return (
-            <NavLink to={`${url}/${cycle.id}/routines`} className='card' key={cycle.id}>
-              <CycleCard
-                cycle={cycle}
+            <NavLink to={`${url}/${routine.id}`} className='card' key={routine.id}>
+              <RoutineCard
+                routine={routine}
                 showEditButtons={showEditButtons}
+                cycleId={+cycleId}
+                routineId={routine.id}
               />
             </NavLink>
           )
         })
       }
     </div>
-    <Modal title={`Create a Cycle`} onClose={() => setShowCreateModal(false)} show={showCreateModal}>
-      <CycleForm setShowModal={setShowCreateModal} method='POST' />
+    <Modal title={`Create a Routine`} onClose={() => setShowCreateModal(false)} show={showCreateModal}>
+      <RoutineForm setShowModal={setShowCreateModal} method='POST' cycleId={cycleId}/>
     </Modal>
   </div>
   )
 }
 
-export default CyclesPage;
+export default RoutinePage;

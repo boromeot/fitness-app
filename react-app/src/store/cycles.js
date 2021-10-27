@@ -1,5 +1,6 @@
 import { POST_ROUTINE, DELETE_ROUTINE, PATCH_ROUTINE } from "./routine";
 import { POST_WORKOUT, POST_WEEKLY_WORKOUT } from "./workout";
+import { POST_EXERCISE } from "./exercise";
 
 const GET_CYCLES = 'cycles/getCycles';
 const POST_CYCLE = 'cycles/postCycle';
@@ -161,6 +162,13 @@ export default function cycles(state = [], action) {
       j = newState[i].routines.findIndex(routine => routine.id === action.payload.routineId);
       newState[i].routines[j].workouts = action.payload.workouts;
       return newState;
+
+    case POST_EXERCISE:
+      newState = [...state];
+      i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
+      j = newState[i].routines.findIndex(routine => routine.id === action.payload.routineId);
+      let k = newState[i].routines[j].workouts.findIndex(workout => workout.id === action.payload.workId)
+      newState[i].routines[j].workouts[k].exercises.push(action.payload.workout)
     default:
       return state;
   }

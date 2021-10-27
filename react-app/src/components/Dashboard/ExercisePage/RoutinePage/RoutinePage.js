@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useParams, NavLink, useRouteMatch, Route } from "react-router-dom";
 import Modal from "../../../Modal/Modal";
-import DayPage from "./DayPage";
 import ExerciseForm from "./ExerciseForm";
 import './RoutinePage.css';
+import ExercisesPage from "./ExercisesPage";
 
 
 const capitalize = (word) => {
@@ -24,10 +24,8 @@ const RoutinePage = () => {
   return (
     <div className='page-template-container'>
       <div className='page-template-button-container'>
-        <div className='page-template-edit-delete-container'>
-          <button className='page-template-create primary-btn btn' onClick={handleCreate}>
-            Create new Exercise
-          </button>
+        <div className='page-template-edit-delete-container' id='routine-page-create-container'>
+          {/*A portal will be created to this container */}
         </div>
         <NavLink to={`/users/${userId}/dashboard/exercise/cycles/${cycleId}/routines`} className='back-btn btn'>
           Back
@@ -42,7 +40,7 @@ const RoutinePage = () => {
       </div>
 
       <Route path={`${path}/:day`}>
-        <DayPage />
+        <ExercisesPage />
       </Route>
 
       <Modal title='Create an Exercise' onClose={() => setShowCreateModal(false)} show={showCreateModal}>

@@ -1,26 +1,23 @@
-import React, { useState } from "react";
-import { useParams, NavLink } from "react-router-dom";
-import Modal from "../../../Modal/Modal";
-import RoutineForm from "../RoutinesPage/RoutineForm";
+import React from "react";
+import { useParams, NavLink, useRouteMatch, Route } from "react-router-dom";
+import ExercisesPage from "./ExercisesPage";
 import './RoutinePage.css';
+
+
+const capitalize = (word) => {
+  return `${word[0].toLocaleUpperCase()}${word.slice(1)}`;
+}
 
 const RoutinePage = () => {
   const { userId, cycleId, routineId } = useParams();
-  const [showCreateModal, setShowCreateModal] = useState(false);
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-  const handleCreate = e => {
-    e.preventDefault();
-    setShowCreateModal(true);
-  }
+  const { path, url } = useRouteMatch();
+  const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
   return (
     <div className='page-template-container'>
       <div className='page-template-button-container'>
-        <div className='page-template-edit-delete-container'>
-          <button className='page-template-create primary-btn btn' onClick={handleCreate}>
-            {`Create new Routine`}
-          </button>
+        <div className='page-template-edit-delete-container' id='routine-page-create-container'>
+          {/*A portal will be created to this container */}
         </div>
         <NavLink to={`/users/${userId}/dashboard/exercise/cycles/${cycleId}/routines`} className='back-btn btn'>
           Back
@@ -29,13 +26,13 @@ const RoutinePage = () => {
       <div className='routine-page-days-container'>
         {
           days.map((day, i) => {
-            return <div className='routine-page-day' key={i}>{day}</div>
+            return <NavLink to={`${url}/${day}`} className='routine-page-day' key={i}>{capitalize(day)}</NavLink>
           })
         }
       </div>
-      <Modal title={`Create a Routine`} onClose={() => setShowCreateModal(false)} show={showCreateModal}>
-        <RoutineForm setShowModal={setShowCreateModal} method='POST' cycleId={cycleId}/>
-      </Modal>
+      <Route path={`${path}/:day`}>
+        <ExercisesPage />
+      </Route>
     </div>
   )
 }

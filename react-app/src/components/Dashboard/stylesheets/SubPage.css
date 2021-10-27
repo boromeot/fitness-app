@@ -16,11 +16,12 @@
   margin-left: 1rem;
 }
 
-.card-conatiner {
+.card-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 5%;
 }
 
 .card {
@@ -38,6 +39,7 @@
 
 .card:hover {
   background-color: #ddd;
+  cursor: pointer;
 }
 
 .card-name {

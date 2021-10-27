@@ -44,7 +44,7 @@ function App() {
           <LandingPage />
         </Route>
         <ProtectedRoute path='/users/:userId/dashboard' >
-        <Dashboard />
+          <Dashboard />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

@@ -10,3 +10,7 @@
   border: solid 1px black;
   flex-grow: 1;
 }
+
+.routine-page-day:hover {
+  background-color: #ddd;
+}

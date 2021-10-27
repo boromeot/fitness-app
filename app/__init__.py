@@ -10,6 +10,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.cycle_routes import cycle_routes
 from .api.routine_routes import routine_routes
+from .api.workout_routes import workout_routes
 
 from .seeds import seed_commands
 
@@ -35,6 +36,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(cycle_routes, url_prefix='/api/cycles')
 app.register_blueprint(routine_routes, url_prefix='/api/routines')
+app.register_blueprint(workout_routes, url_prefix='/api/workouts')
 db.init_app(app)
 Migrate(app, db)
 

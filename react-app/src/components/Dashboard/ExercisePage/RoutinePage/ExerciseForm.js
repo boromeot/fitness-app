@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { patchRoutine, postRoutine } from "../../../../store/routine";
-import { postWeeklyWorkout } from "../../../../store/workout";
+// import { patchRoutine, postRoutine } from "../../../../store/routine";
 
-const RoutineForm = ({ setShowModal, method, cycleId, routineId }) => {
+const ExerciseForm = ({ setShowModal, method, cycleId, routineId }) => {
   const dispatch = useDispatch();
   const { id:userId } = useSelector(state => state.session.user);
   const [name, setName] = useState('');
@@ -11,17 +10,14 @@ const RoutineForm = ({ setShowModal, method, cycleId, routineId }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    let newRoutine;
+    let data;
     if (method === 'POST') {
-      //Creates a new Routine
-      newRoutine = await dispatch(postRoutine(name, userId, +cycleId));
-      //Instanitates the new routine with default daily workouts
-      await dispatch(postWeeklyWorkout(userId, newRoutine.id, +cycleId))
+      // data = await dispatch(postRoutine(name, userId, +cycleId));
     } else if (method === 'PATCH') {
-      newRoutine = await dispatch(patchRoutine(name, userId, +cycleId, routineId));
+      // data = await dispatch(patchRoutine(name, userId, +cycleId, routineId));
     }
-    if (newRoutine.errors) {
-      setErrors(newRoutine.errors);
+    if (data.errors) {
+      setErrors(data.errors);
     } else {
       setShowModal(false);
     }
@@ -39,7 +35,7 @@ const RoutineForm = ({ setShowModal, method, cycleId, routineId }) => {
       <div>
         <input
           name='name'
-          placeholder='Routine name'
+          placeholder='Exercise name'
           value={name}
           onChange={handleChange}
           className='form-input exercise-page-form-input'
@@ -50,4 +46,4 @@ const RoutineForm = ({ setShowModal, method, cycleId, routineId }) => {
   )
 }
 
-export default RoutineForm;
+export default ExerciseForm;

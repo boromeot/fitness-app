@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { patchRoutine, postRoutine } from "../../../../store/routine";
-import { postWorkout } from "../../../../store/workout";
+import { postWeeklyWorkout } from "../../../../store/workout";
 
 const RoutineForm = ({ setShowModal, method, cycleId, routineId }) => {
   const dispatch = useDispatch();
@@ -11,15 +11,17 @@ const RoutineForm = ({ setShowModal, method, cycleId, routineId }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    let data;
+    let newRoutine;
     if (method === 'POST') {
-      data = await dispatch(postRoutine(name, userId, +cycleId));
-      await dispatch(postWorkout)
+      //Creates a new Routine
+      newRoutine = await dispatch(postRoutine(name, userId, +cycleId));
+      //Instanitates the new routine with default daily workouts
+      await dispatch(postWeeklyWorkout(userId, newRoutine.id, +cycleId))
     } else if (method === 'PATCH') {
-      data = await dispatch(patchRoutine(name, userId, +cycleId, routineId));
+      newRoutine = await dispatch(patchRoutine(name, userId, +cycleId, routineId));
     }
-    if (data.errors) {
-      setErrors(data.errors);
+    if (newRoutine.errors) {
+      setErrors(newRoutine.errors);
     } else {
       setShowModal(false);
     }

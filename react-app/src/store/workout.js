@@ -26,7 +26,7 @@ export const postWeeklyWorkout = (user_id, routine_id, cycle_id) => async dispat
 
   if (response.ok) {
     const workouts = await response.json();
-    dispatch(post_workout(workouts, cycle_id, routine_id));
+    dispatch(post_weekly_workout(workouts, cycle_id, routine_id));
     return workouts;
   }
   else {

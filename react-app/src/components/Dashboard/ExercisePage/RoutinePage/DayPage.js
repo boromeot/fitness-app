@@ -8,8 +8,6 @@ const DayPage = () => {
   const currentCycle = cycles.find(cycle => cycle.id === +cycleId);
   const currentRoutine = currentCycle.routines.find(routine => routine.id === +routineId);
   const currentDay = currentRoutine.workouts.find(workout => workout.day === day);
-
-  console.log(currentDay);
   return (
     <div className='card-container'>
       {

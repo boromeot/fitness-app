@@ -43,12 +43,12 @@ def post_weekly_workouts():
 		workouts = []
 		for day in days:
 			workout = Workout(
-				day,
+				day = day,
 				user_id = form.data['user_id'],
 				routine_id = form.data['routine_id']
 			)
 			db.session.add(workout)
+			db.session.commit()
 			workouts.append(workout.to_dict())
-		db.session.commit()
-		return workouts
+		return jsonify(workouts)
 	return {'errors': validation_errors_to_error_messages(form.errors)}, 401

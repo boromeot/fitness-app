@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams, NavLink, useRouteMatch, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 import ExercisesPage from "./ExercisesPage";
 import './RoutinePage.css';
 
@@ -11,7 +12,9 @@ const capitalize = (word) => {
 const RoutinePage = () => {
   const { userId, cycleId, routineId } = useParams();
   const { path, url } = useRouteMatch();
-  const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  const { cycles } = useSelector(state => state);
+  const currentCycle = cycles.find(cycle => cycle.id === +cycleId);
+  const currentRoutine = currentCycle.routines.find(routine => routine.id === +routineId);
 
   return (
     <div className='page-template-container'>
@@ -25,12 +28,12 @@ const RoutinePage = () => {
       </div>
       <div className='routine-page-days-container'>
         {
-          days.map((day, i) => {
-            return <NavLink to={`${url}/${day}`} className='routine-page-day' key={i}>{capitalize(day)}</NavLink>
+          currentRoutine?.workouts.map(workout => {
+            return <NavLink to={`${url}/workouts/${workout.id}`} className='routine-page-day' key={workout.id}>{capitalize(workout.day)}</NavLink>
           })
         }
       </div>
-      <Route path={`${path}/:day`}>
+      <Route path={`${path}/workouts/:workId`}>
         <ExercisesPage />
       </Route>
     </div>

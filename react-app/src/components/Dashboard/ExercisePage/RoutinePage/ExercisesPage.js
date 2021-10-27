@@ -19,17 +19,17 @@ const ExercisesPage = () => {
     setShowCreateModal(true);
   }
 
-  const { cycleId, routineId, day } = useParams();
+  const { cycleId, routineId, workId } = useParams();
   const cycles = useSelector(state => state.cycles)
   const currentCycle = cycles.find(cycle => cycle.id === +cycleId);
   const currentRoutine = currentCycle.routines.find(routine => routine.id === +routineId);
-  const currentDay = currentRoutine.workouts.find(workout => workout.day === day);
+  const currentDay = currentRoutine.workouts.find(workout => workout.id === +workId);
   return (
     <>
       <div className='card-container'>
         {
           currentDay?.exercises.map(exercise => {
-            return <div className='card'> {exercise.name} &nbsp; {exercise.id}</div>
+            return <div className='card' key={exercise.id}>{exercise.name}</div>
           })
         }
       </div>
@@ -45,7 +45,7 @@ const ExercisesPage = () => {
         //so we generate the modal and button here and send the react element to the parent page to retain the same layout as the previous pages
       }
       <Modal title='Create an Exercise' onClose={() => setShowCreateModal(false)} show={showCreateModal}>
-        <ExerciseForm />
+        <ExerciseForm setShowModal={setShowCreateModal} method='POST' cycleId={cycleId} routineId={routineId} workId={workId}/>
       </Modal>
     </>
   )

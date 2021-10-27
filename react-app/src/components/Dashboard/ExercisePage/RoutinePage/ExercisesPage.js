@@ -19,11 +19,11 @@ const ExercisesPage = () => {
     setShowCreateModal(true);
   }
 
-  const { cycleId, routineId, day } = useParams();
+  const { cycleId, routineId, workoutId } = useParams();
   const cycles = useSelector(state => state.cycles)
   const currentCycle = cycles.find(cycle => cycle.id === +cycleId);
   const currentRoutine = currentCycle.routines.find(routine => routine.id === +routineId);
-  const currentDay = currentRoutine.workouts.find(workout => workout.day === day);
+  const currentDay = currentRoutine.workouts.find(workout => workout.id === +workoutId);
   return (
     <>
       <div className='card-container'>

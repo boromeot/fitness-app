@@ -9,6 +9,7 @@ const ExercisesPage = () => {
   const [loaded, setLoaded] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
+  //usEffect is needed because the portal was trying to get 'routine-page-create-container' before the dom node existed
   useEffect(() => {
     setLoaded(true);
   }, [])

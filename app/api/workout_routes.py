@@ -2,10 +2,10 @@ from flask import Blueprint, jsonify, request
 from app.api.auth_routes import login
 from app.forms.workout_form import WorkoutForm
 from flask_login import login_required, current_user
-from app.models import Workout, db
+from app.models import Workout, db, workout
 
 
-workout_routes = Blueprint('routines', __name__)
+workout_routes = Blueprint('workouts', __name__)
 
 def validation_errors_to_error_messages(validation_errors):
 	"""
@@ -19,7 +19,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 @workout_routes.route('/', methods=['POST'])
 @login_required
-def post_exercise():
+def post_workout():
 	form = WorkoutForm()
 	form['csrf_token'].data = request.cookies['csrf_token']
 	if form.validate_on_submit():
@@ -31,4 +31,24 @@ def post_exercise():
 		db.session.add(workout)
 		db.session.commit()
 		return workout.to_dict()
+	return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@workout_routes.route('/weekly', methods=['POST'])
+@login_required
+def post_weekly_workouts():
+	form = WorkoutForm()
+	form['csrf_token'].data = request.cookies['csrf_token']
+	if form.validate_on_submit():
+		days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+		workouts = []
+		for day in days:
+			workout = Workout(
+				day,
+				user_id = form.data['user_id'],
+				routine_id = form.data['routine_id']
+			)
+			db.session.add(workout)
+			workouts.append(workout.to_dict())
+		db.session.commit()
+		return workouts
 	return {'errors': validation_errors_to_error_messages(form.errors)}, 401

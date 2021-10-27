@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { patchRoutine, postRoutine } from "../../../../store/routine";
+import { postWorkout } from "../../../../store/workout";
 
 const RoutineForm = ({ setShowModal, method, cycleId, routineId }) => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const RoutineForm = ({ setShowModal, method, cycleId, routineId }) => {
     let data;
     if (method === 'POST') {
       data = await dispatch(postRoutine(name, userId, +cycleId));
+      await dispatch(postWorkout)
     } else if (method === 'PATCH') {
       data = await dispatch(patchRoutine(name, userId, +cycleId, routineId));
     }

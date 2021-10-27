@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams, NavLink, useRouteMatch, Route } from "react-router-dom";
-import Modal from "../../../Modal/Modal";
-import ExerciseForm from "./ExerciseForm";
-import './RoutinePage.css';
 import ExercisesPage from "./ExercisesPage";
+import './RoutinePage.css';
 
 
 const capitalize = (word) => {
@@ -13,13 +11,7 @@ const capitalize = (word) => {
 const RoutinePage = () => {
   const { userId, cycleId, routineId } = useParams();
   const { path, url } = useRouteMatch();
-  const [showCreateModal, setShowCreateModal] = useState(false);
   const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-
-  const handleCreate = e => {
-    e.preventDefault();
-    setShowCreateModal(true);
-  }
 
   return (
     <div className='page-template-container'>
@@ -38,14 +30,9 @@ const RoutinePage = () => {
           })
         }
       </div>
-
       <Route path={`${path}/:day`}>
         <ExercisesPage />
       </Route>
-
-      <Modal title='Create an Exercise' onClose={() => setShowCreateModal(false)} show={showCreateModal}>
-        <ExerciseForm />
-      </Modal>
     </div>
   )
 }

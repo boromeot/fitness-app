@@ -18,7 +18,6 @@ const ExercisesPage = () => {
     setShowCreateModal(true);
   }
 
-
   const { cycleId, routineId, day } = useParams();
   const cycles = useSelector(state => state.cycles)
   const currentCycle = cycles.find(cycle => cycle.id === +cycleId);
@@ -33,6 +32,7 @@ const ExercisesPage = () => {
           })
         }
       </div>
+
       {loaded &&
         createPortal(
           <button className='page-template-create primary-btn btn' onClick={handleCreate}>
@@ -40,6 +40,8 @@ const ExercisesPage = () => {
           </button>,
           document.getElementById('routine-page-create-container')
         )
+        //Portal is being used because the button and modal needs to know what ExercisePage / day they belong to
+        //so we generate the modal and button here and send the react element to the parent page to retain the same layout as the previous pages
       }
       <Modal title='Create an Exercise' onClose={() => setShowCreateModal(false)} show={showCreateModal}>
         <ExerciseForm />

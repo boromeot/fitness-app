@@ -15,10 +15,6 @@ const RoutinePage = () => {
   const { cycles } = useSelector(state => state);
   const currentCycle = cycles.find(cycle => cycle.id === +cycleId);
   const currentRoutine = currentCycle.routines.find(routine => routine.id === +routineId);
-  console.log(currentRoutine, 'gggggggg');
-
-  const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-
 
   return (
     <div className='page-template-container'>
@@ -37,7 +33,7 @@ const RoutinePage = () => {
           })
         }
       </div>
-      <Route path={`${path}/workouts/:workoutId`}>
+      <Route path={`${path}/workouts/:workId`}>
         <ExercisesPage />
       </Route>
     </div>

@@ -2,7 +2,7 @@ export const POST_EXERCISE = 'exercise/postExercise';
 
 const post_exercise = (exercise, cycleId, routineId, workId) => {
   return {
-    typr: POST_EXERCISE,
+    type: POST_EXERCISE,
     payload: {
       exercise,
       cycleId,

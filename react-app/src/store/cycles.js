@@ -168,7 +168,7 @@ export default function cycles(state = [], action) {
       i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
       j = newState[i].routines.findIndex(routine => routine.id === action.payload.routineId);
       let k = newState[i].routines[j].workouts.findIndex(workout => workout.id === action.payload.workId)
-      newState[i].routines[j].workouts[k].exercises.push(action.payload.workout)
+      newState[i].routines[j].workouts[k].exercises.push(action.payload.exercise);
       return newState;
     default:
       return state;

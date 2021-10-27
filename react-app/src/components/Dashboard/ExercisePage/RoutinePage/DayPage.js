@@ -14,7 +14,7 @@ const DayPage = () => {
     <div className='card-container'>
       {
         currentDay?.exercises.map(exercise => {
-          return <div className='card'> {exercise.name} </div>
+          return <div className='card'> {exercise.name} &nbsp; {exercise.id}</div>
         })
       }
     </div>

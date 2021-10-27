@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useParams, NavLink, useRouteMatch, Route } from "react-router-dom";
 import Modal from "../../../Modal/Modal";
-import RoutineForm from "../RoutinesPage/RoutineForm";
 import DayPage from "./DayPage";
+import ExerciseForm from "./ExerciseForm";
 import './RoutinePage.css';
 
 
@@ -26,7 +26,7 @@ const RoutinePage = () => {
       <div className='page-template-button-container'>
         <div className='page-template-edit-delete-container'>
           <button className='page-template-create primary-btn btn' onClick={handleCreate}>
-            {`Create new Routine`}
+            Create new Exercise
           </button>
         </div>
         <NavLink to={`/users/${userId}/dashboard/exercise/cycles/${cycleId}/routines`} className='back-btn btn'>
@@ -40,12 +40,13 @@ const RoutinePage = () => {
           })
         }
       </div>
+
       <Route path={`${path}/:day`}>
         <DayPage />
       </Route>
 
-      <Modal title={`Create a Routine`} onClose={() => setShowCreateModal(false)} show={showCreateModal}>
-        <RoutineForm setShowModal={setShowCreateModal} method='POST' cycleId={cycleId}/>
+      <Modal title='Create an Exercise' onClose={() => setShowCreateModal(false)} show={showCreateModal}>
+        <ExerciseForm />
       </Modal>
     </div>
   )

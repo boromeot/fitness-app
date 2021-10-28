@@ -20,5 +20,5 @@ class Exercise(db.Model):
       'id': self.id,
       'name': self.name,
       'body_part': self.body_part,
-      'sets': self.sets
+      'sets': [set.to_dict() for set in self.sets]
     }

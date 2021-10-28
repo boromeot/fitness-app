@@ -1,6 +1,7 @@
 import { POST_ROUTINE, DELETE_ROUTINE, PATCH_ROUTINE } from "./routine";
 import { POST_WORKOUT, POST_WEEKLY_WORKOUT } from "./workout";
-import { POST_EXERCISE } from "./exercise";
+import { DELETE_EXERCISE, POST_EXERCISE, PATCH_EXERCISE } from "./exercise";
+import { POST_SET, DELETE_SET, PATCH_SET } from "./set";
 
 const GET_CYCLES = 'cycles/getCycles';
 const POST_CYCLE = 'cycles/postCycle';
@@ -112,6 +113,8 @@ export default function cycles(state = [], action) {
   let newState;
   let i;
   let j;
+  let k;
+  let l;
   switch (action.type) {
     case GET_CYCLES:
       newState = action.payload;
@@ -130,7 +133,7 @@ export default function cycles(state = [], action) {
       i = newState.findIndex(cycle => cycle.id === action.payload.id);
       newState[i].name = action.payload.name;
       return newState;
-
+    //Routines
     case POST_ROUTINE:
       newState = [...state];
       i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
@@ -149,7 +152,7 @@ export default function cycles(state = [], action) {
       j = newState[i].routines.findIndex(routine => routine.id === action.payload.routineId);
       newState[i].routines[j].name = action.payload.routine.name;
       return newState;
-
+    //Workouts
     case POST_WORKOUT:
       newState = [...state];
       i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
@@ -162,13 +165,59 @@ export default function cycles(state = [], action) {
       j = newState[i].routines.findIndex(routine => routine.id === action.payload.routineId);
       newState[i].routines[j].workouts = action.payload.workouts;
       return newState;
-
+    //Exercises
     case POST_EXERCISE:
       newState = [...state];
       i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
       j = newState[i].routines.findIndex(routine => routine.id === action.payload.routineId);
-      let k = newState[i].routines[j].workouts.findIndex(workout => workout.id === action.payload.workId)
+      k = newState[i].routines[j].workouts.findIndex(workout => workout.id === action.payload.workId)
       newState[i].routines[j].workouts[k].exercises.push(action.payload.exercise);
+      return newState;
+    case DELETE_EXERCISE:
+      newState = [...state];
+      i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
+      j = newState[i].routines.findIndex(routine => routine.id === action.payload.routineId);
+      k = newState[i].routines[j].workouts.findIndex(workout => workout.id === action.payload.workId)
+      newState[i].routines[j].workouts[k].exercises= newState[i].routines[j].workouts[k].exercises.filter(exercise => {
+        return exercise.id !== action.payload.exerciseId;
+      })
+      return newState;
+    case PATCH_EXERCISE:
+      newState = [...state];
+      i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
+      j = newState[i].routines.findIndex(routine => routine.id === action.payload.routineId);
+      k = newState[i].routines[j].workouts.findIndex(workout => workout.id === action.payload.workId);
+      l = newState[i].routines[j].workouts[k].exercises.findIndex(exercise => exercise.id === action.payload.exerciseId);
+      newState[i].routines[j].workouts[k].exercises[l].name = action.payload.exercise.name;
+      newState[i].routines[j].workouts[k].exercises[l].body_part = action.payload.exercise.body_part;
+      return newState;
+
+    case POST_SET:
+      newState = [...state];
+      i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
+      j = newState[i].routines.findIndex(routine => routine.id === action.payload.routineId);
+      k = newState[i].routines[j].workouts.findIndex(workout => workout.id === action.payload.workId);
+      l = newState[i].routines[j].workouts[k].exercises.findIndex(exercise => exercise.id === action.payload.exerciseId);
+      newState[i].routines[j].workouts[k].exercises[l].sets.push(action.payload.set);
+      return newState;
+    case DELETE_SET:
+      newState = [...state];
+      i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
+      j = newState[i].routines.findIndex(routine => routine.id === action.payload.routineId);
+      k = newState[i].routines[j].workouts.findIndex(workout => workout.id === action.payload.workId)
+      l = newState[i].routines[j].workouts[k].exercises.findIndex(exercise => exercise.id === action.payload.exerciseId);
+      newState[i].routines[j].workouts[k].exercises[l].sets = newState[i].routines[j].workouts[k].exercises[l].sets.filter(set => {
+        return set.id !== action.payload.setId;
+      });
+      return newState;
+    case PATCH_SET:
+      newState = [...state];
+      i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
+      j = newState[i].routines.findIndex(routine => routine.id === action.payload.routineId);
+      k = newState[i].routines[j].workouts.findIndex(workout => workout.id === action.payload.workId)
+      l = newState[i].routines[j].workouts[k].exercises.findIndex(exercise => exercise.id === action.payload.exerciseId);
+      let m = newState[i].routines[j].workouts[k].exercises[l].sets.findIndex(set => set.id === action.payload.setId);
+      newState[i].routines[j].workouts[k].exercises[l].sets[m] = action.payload.set;
       return newState;
     default:
       return state;

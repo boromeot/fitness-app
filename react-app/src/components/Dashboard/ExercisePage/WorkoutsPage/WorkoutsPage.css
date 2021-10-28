@@ -12,5 +12,9 @@
 }
 
 .routine-page-day:hover {
-  background-color: #ddd;
+  background-color: var(--primary-color);
+}
+
+.active-day {
+  background-color: var(--primary-color);
 }

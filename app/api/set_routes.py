@@ -1,10 +1,12 @@
+from logging import log
+from typing import Set
 from flask import Blueprint, jsonify, request
 from app.api.auth_routes import login
-from app.forms.exercise_form import ExerciseForm
+from app.forms.set_form import SetForm
 from flask_login import login_required, current_user
-from app.models import Exercise, db
+from app.models import Set, db
 
-exercise_routes = Blueprint('exercises', __name__)
+set_routes = Blueprint('sets', __name__)
 
 def validation_errors_to_error_messages(validation_errors):
     """
@@ -16,46 +18,49 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{error}')
     return errorMessages
 
-@exercise_routes.route('/', methods=['POST'])
+@set_routes.route('/', methods=['POST'])
 @login_required
-def post_exercise():
-  form = ExerciseForm()
+def post_set():
+  form = SetForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
-    exercise = Exercise(
-      name = form.data['name'],
-      body_part = form.data['body_part'],
+    set = Set(
+      total_reps = form.data['total_reps'],
+      weight = form.data['weight'],
+      unit = form.data['unit'],
       user_id = form.data['user_id'],
-      work_id = form.data['work_id']
+      exercise_id = form.data['exercise_id']
     )
-    db.session.add(exercise)
+    db.session.add(set)
     db.session.commit()
-    return exercise.to_dict()
+    return set.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@exercise_routes.route('/<int:id>', methods=['DELETE'])
+@set_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
-def delete_exercise(id):
-  exercise = Exercise.query.get(id)
-  if current_user.id == exercise.user_id:
-    db.session.delete(exercise)
+def delete_set(id):
+  set = Set.query.get(id)
+  if current_user.id == set.user_id:
+    db.session.delete(set)
     db.session.commit()
-    return {'message': 'Successfully deleted routine'}
+    return {'message': 'Successfully deleted set'}
   else:
     return {'errors': ['Unathorized']}
 
-@exercise_routes.route('/<int:id>', methods=['PATCH'])
+@set_routes.route('/<int:id>', methods=['PATCH'])
 @login_required
-def patch_exercise(id):
-  form = ExerciseForm()
+def patch_set(id):
+  form = SetForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
-    exercise = Exercise.query.get(id)
-    if current_user.id == exercise.user_id:
-      exercise.name = form.data['name']
-      exercise.body_part = form.data['body_part']
+    set = Set.query.get(id)
+    if current_user.id == set.user_id:
+      set.completed_reps = form.data['completed_reps'],
+      set.total_reps = form.data['total_reps'],
+      set.weight = form.data['weight'],
+      set.unit = form.data['unit'],
       db.session.commit()
-      return exercise.to_dict()
+      return set.to_dict()
     else:
       return {'errors': ['Unathorized']}
   else:

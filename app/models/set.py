@@ -6,8 +6,8 @@ class Set(db.Model):
   completed_reps = db.Column(db.Integer, default=0)
   total_reps = db.Column(db.Integer)
   weight = db.Column(db.Float, default=0)
+  unit = db.Column(db.String, default='lbs')
   body_weight = db.Column(db.Boolean, default=False)
-  is_kilogram = db.Column(db.Boolean, default=False)
 
   #Foreign Keys
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -24,5 +24,5 @@ class Set(db.Model):
       'total_reps': self.total_reps,
       'weight': self.weight,
       'body_weight': self.body_weight,
-      'is_kilogram': self.is_kilogram
+      'unit': self.unit
     }

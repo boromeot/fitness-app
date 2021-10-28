@@ -31,7 +31,7 @@ const ExerciseCard = ({ exercise, showEditButtons, cycleId, routineId, workId, e
             <button className='delete-btn btn' onClick={e => handleDelete(e, cycleId, routineId, workId, exerciseId)}>Delete</button>
           </div>
           <Modal title='Edit Exercise' onClose={() => setShowModal(false)} show={showModal} >
-            <ExerciseForm setShowModal={setShowModal} method='PATCH' cycleId={cycleId} routineId={routineId} exerciseId={exerciseId} workId={workId}/>
+            <ExerciseForm exercise={exercise} setShowModal={setShowModal} method='PATCH' cycleId={cycleId} routineId={routineId} exerciseId={exerciseId} workId={workId}/>
           </Modal>
         </>
       }

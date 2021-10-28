@@ -192,6 +192,14 @@ export default function cycles(state = [], action) {
       newState[i].routines[j].workouts[k].exercises[l].body_part = action.payload.exercise.body_part;
       return newState;
 
+    case POST_SET:
+      newState = [...state];
+      i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
+      j = newState[i].routines.findIndex(routine => routine.id === action.payload.routineId);
+      k = newState[i].routines[j].workouts.findIndex(workout => workout.id === action.payload.workId);
+      l = newState[i].routines[j].workouts[k].exercises.findIndex(exercise => exercise.id === action.payload.exerciseId);
+      newState[i].routines[j].workouts[k].exercises[l].sets.push(action.payload.set);
+      return newState;
     case DELETE_SET:
       newState = [...state];
       i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);

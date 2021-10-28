@@ -32,3 +32,14 @@ def post_exercise():
     db.session.commit()
     return exercise.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@exercise_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_exercise(id):
+  exercise = Exercise.query.get(id)
+  if current_user.id == exercise.get(id):
+    db.session.delete(exercise)
+    db.session.commit()
+    return {'message': 'Successfully deleted routine'}
+  else:
+    return {'errors': ['Unathorized']}

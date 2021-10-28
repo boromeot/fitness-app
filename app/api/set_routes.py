@@ -21,9 +21,7 @@ def validation_errors_to_error_messages(validation_errors):
 @login_required
 def post_set():
   form = SetForm()
-  print('bbbbbbbbbbbb')
   form['csrf_token'].data = request.cookies['csrf_token']
-  print(form.data, 'ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
   if form.validate_on_submit():
     set = Set(
       total_reps = form.data['total_reps'],
@@ -36,3 +34,14 @@ def post_set():
     db.session.commit()
     return set.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@set_routes.route('<int:id>', methods=['DELETE'])
+@login_required
+def delete_set(id):
+  set = Set.query.get(id)
+  if current_user.id == set.user_id:
+    db.session.delete(set)
+    db.session.commit()
+    return {'message': 'Successfully deleted set'}
+  else:
+    return {'errors': ['Unathorized']}

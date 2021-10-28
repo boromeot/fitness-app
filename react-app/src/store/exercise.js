@@ -61,7 +61,7 @@ export const deleteExercise = (cycleId, routineId, workId, exercise_id) => async
   })
   if (response.ok) {
     const data = await response.json();
-    dispatch(delete_exercise(routineId, cycleId, workId, exercise_id));
+    dispatch(delete_exercise(cycleId, routineId, workId, exercise_id));
     return data;
   }
 }

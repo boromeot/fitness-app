@@ -4,13 +4,13 @@ import Modal from "../../../Modal/Modal";
 import ExerciseForm from "./ExerciseForm";
 import { deleteExercise } from "../../../../store/exercise";
 
-const ExerciseCard = ({ exercise, showEditButtons, cycleId, routineId}) => {
+const ExerciseCard = ({ exercise, showEditButtons, cycleId, routineId, workId, exerciseId}) => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
 
-  const handleDelete = (e, cycleId) => {
+  const handleDelete = (e, cycleId, routineId, workId, exerciseId) => {
     e.preventDefault();
-    dispatch(deleteExercise(routineId, cycleId));
+    dispatch(deleteExercise(cycleId, routineId, workId, exerciseId));
   }
 
   const toggleEditModal = e => {
@@ -28,7 +28,7 @@ const ExerciseCard = ({ exercise, showEditButtons, cycleId, routineId}) => {
         <>
           <div className='card-button-container'>
             <button className='edit-btn btn' onClick={toggleEditModal}>Edit</button>
-            <button className='delete-btn btn' onClick={e => handleDelete(e, cycleId)}>Delete</button>
+            <button className='delete-btn btn' onClick={e => handleDelete(e, cycleId, routineId, workId, exerciseId)}>Delete</button>
           </div>
           <Modal title='Edit Exercise' onClose={() => setShowModal(false)} show={showModal} >
             <ExerciseForm setShowModal={setShowModal} method='PATCH' cycleId={cycleId} routineId={routineId}/>

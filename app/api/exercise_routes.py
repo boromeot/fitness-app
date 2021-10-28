@@ -37,7 +37,7 @@ def post_exercise():
 @login_required
 def delete_exercise(id):
   exercise = Exercise.query.get(id)
-  if current_user.id == exercise.get(id):
+  if current_user.id == exercise.user_id:
     db.session.delete(exercise)
     db.session.commit()
     return {'message': 'Successfully deleted routine'}

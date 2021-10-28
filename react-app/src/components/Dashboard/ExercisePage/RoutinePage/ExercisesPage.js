@@ -37,12 +37,15 @@ const ExercisesPage = () => {
       <div className='card-container'>
         {
           currentDay?.exercises.map(exercise => {
-          //   return <div className='card' key={exercise.id}>{exercise.name}</div>
             return (
-              <NavLink to='#' className='card'>
+              <NavLink to='#' className='card' key={exercise.id}>
                 <ExerciseCard
                   exercise={exercise}
                   showEditButtons={showEditButtons}
+                  cycleId={+cycleId}
+                  routineId={+routineId}
+                  workId={+workId}
+                  exerciseId={exercise.id}
                 />
               </NavLink>
             )

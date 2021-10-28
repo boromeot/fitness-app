@@ -54,7 +54,7 @@ export const postSet = (total_reps, weight, unit, user_id, cycleId, routineId, w
 }
 
 export const deleteSet = (cycleId, routineId, workId, exerciseId, set_id) => async dispatch => {
-  const response = await fetch(`/api/set/${set_id}`, {
+  const response = await fetch(`/api/sets/${set_id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ export const deleteSet = (cycleId, routineId, workId, exerciseId, set_id) => asy
   })
   if (response.ok) {
     const data = await response.json();
-    dispatch(delete_exercise(cycleId, routineId, workId, exerciseId, set_id));
+    dispatch(delete_set(cycleId, routineId, workId, exerciseId, set_id));
     return data;
   }
 }

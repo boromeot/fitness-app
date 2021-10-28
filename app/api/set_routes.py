@@ -1,3 +1,4 @@
+from logging import log
 from typing import Set
 from flask import Blueprint, jsonify, request
 from app.api.auth_routes import login
@@ -35,7 +36,7 @@ def post_set():
     return set.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@set_routes.route('<int:id>', methods=['DELETE'])
+@set_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_set(id):
   set = Set.query.get(id)
@@ -45,3 +46,20 @@ def delete_set(id):
     return {'message': 'Successfully deleted set'}
   else:
     return {'errors': ['Unathorized']}
+
+@set_routes.route('/<int:id>', methods=['PATCH'])
+@login_required
+def patch_set(id):
+  form = SetForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    set = Set.query.get(id)
+    if current_user.id == set.user_id:
+      set.completed_reps = form.data['completed_reps'],
+      set.total_reps = form.data['total_reps'],
+      set.weight = form.data['weight'],
+      set.unit = form.data['unit'],
+    else:
+      return {'errors': ['Unathorized']}
+  else:
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401

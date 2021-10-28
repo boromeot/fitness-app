@@ -38,7 +38,7 @@ const ExercisePage = () => {
       <Route path={`${path}/cycles/:cycleId/routines/:routineId`}>
         <RoutinePage />
       </Route>
-      <Route path={`${path}/cycles/:cycleId/routines/:routineId/exercises/:exerciseId`}>
+      <Route path={`${path}/cycles/:cycleId/routines/:routineId/workouts/:workId/exercises/:exerciseId`}>
         <SetsPage />
       </Route>
       <Route path={`${path}/routines`} exact>

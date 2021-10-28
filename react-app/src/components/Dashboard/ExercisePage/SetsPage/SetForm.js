@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router";
+import { postSet } from "../../../../store/set";
 
-const SetForm = ({ setShowModal, method, cycleId, routineId, workId, exerciseId }) => {
+const SetForm = ({ setShowModal, method}) => {
+  const { cycleId, routineId, workId, exerciseId } = useParams();
   const dispatch = useDispatch();
   const { id:userId } = useSelector(state => state.session.user);
-  const [reps, setReps] = useState();
+  const [totalReps, setTotalReps] = useState();
   const [weight, setweight] = useState();
-  const [unit, setUnit] = useState();
+  const [unit, setUnit] = useState('lb');
   const [errors, setErrors] = useState([]);
 
   const handleSubmit = async e => {
     e.preventDefault();
     let data;
     if (method === 'POST') {
-      // data = await dispatch(postExercise(name, 'legs', userId, +cycleId, +routineId, +workId));
+      data = await dispatch(postSet(totalReps, weight, unit, userId, +cycleId, +routineId, +workId, +exerciseId));
     } else if (method === 'PATCH') {
       // data = await dispatch(patchExercise(name, 'arms', userId, +cycleId, +routineId, +workId, exerciseId))
     }
@@ -31,10 +34,10 @@ const SetForm = ({ setShowModal, method, cycleId, routineId, workId, exerciseId 
       }
       <div>
         <input
-          name='reps'
-          placeholder='Number of reps'
-          value={reps}
-          onChange={e => setReps(e.target.value)}
+          name='totalReps'
+          placeholder='Number of totalReps'
+          value={totalReps}
+          onChange={e => setTotalReps(e.target.value)}
           className='form-input exercise-page-form-input'
           type='number'
           min={0}
@@ -49,8 +52,8 @@ const SetForm = ({ setShowModal, method, cycleId, routineId, workId, exerciseId 
           min={0}
         />
         <select value={unit} onChange={e => setUnit(e.target.value)} className='form-input exercise-page-form-input'>
-          <option selected value="lbs">lbs</option>
-          <option value="kg">kgs</option>
+          <option selected value="lb">lb</option>
+          <option value="kg">kg</option>
         </select>
       </div>
       <button className='primary-btn btn' type='submit'>Submit</button>

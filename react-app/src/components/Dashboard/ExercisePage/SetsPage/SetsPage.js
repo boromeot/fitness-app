@@ -44,6 +44,7 @@ const SetsPage = () => {
             return (
               <div className='card' key={set.id}>
                 <SetCard
+                  set={set}
                   showEditButtons={showEditButtons}
                   cycleId={+cycleId}
                   routineId={+routineId}
@@ -72,7 +73,7 @@ const SetsPage = () => {
         //so we generate the modal and button here and send the react element to the parent page to retain the same layout as the previous pages
       }
     <Modal title={`Add a Set`} onClose={() => setShowCreateModal(false)} show={showCreateModal}>
-      <SetForm setShowModal={setShowCreateModal} method='POST' cycleId={cycleId} routineId={routineId} workId={workId}/>
+      <SetForm setShowModal={setShowCreateModal} method='POST' />
     </Modal>
   </div>
   )

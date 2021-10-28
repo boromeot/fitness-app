@@ -21,7 +21,9 @@ def validation_errors_to_error_messages(validation_errors):
 @login_required
 def post_set():
   form = SetForm()
+  print('bbbbbbbbbbbb')
   form['csrf_token'].data = request.cookies['csrf_token']
+  print(form.data, 'ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
   if form.validate_on_submit():
     set = Set(
       total_reps = form.data['total_reps'],
@@ -34,4 +36,3 @@ def post_set():
     db.session.commit()
     return set.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-  

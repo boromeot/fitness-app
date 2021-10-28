@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import Modal from "../../../Modal/Modal";
 import SetForm from "./SetForm";
 
-const SetCard = ({ showEditButtons, cycleId, routineId, workId, exerciseId }) => {
+const SetCard = ({ set, showEditButtons, cycleId, routineId, workId, exerciseId }) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
@@ -21,7 +21,7 @@ const SetCard = ({ showEditButtons, cycleId, routineId, workId, exerciseId }) =>
   return (
     <>
       <div className='card-name'>
-        {'set'}
+        {`${set.total_reps} reps at ${set.weight}${set.unit}`}
       </div>
       {showEditButtons &&
         <>

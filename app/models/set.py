@@ -24,5 +24,5 @@ class Set(db.Model):
       'total_reps': self.total_reps,
       'weight': self.weight,
       'body_weight': self.body_weight,
-      'is_kilogram': self.is_kilogram
+      'unit': self.unit
     }

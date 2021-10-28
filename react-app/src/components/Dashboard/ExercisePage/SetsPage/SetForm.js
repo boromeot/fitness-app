@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { postSet } from "../../../../store/set";
+import { patchSet, postSet } from "../../../../store/set";
 
-const SetForm = ({ setShowModal, method}) => {
+const SetForm = ({ set, setShowModal, method}) => {
   const { cycleId, routineId, workId, exerciseId } = useParams();
   const dispatch = useDispatch();
   const { id:userId } = useSelector(state => state.session.user);
@@ -18,7 +18,7 @@ const SetForm = ({ setShowModal, method}) => {
     if (method === 'POST') {
       data = await dispatch(postSet(totalReps, weight, unit, userId, +cycleId, +routineId, +workId, +exerciseId));
     } else if (method === 'PATCH') {
-      // data = await dispatch(patchExercise(name, 'arms', userId, +cycleId, +routineId, +workId, exerciseId))
+      data = await dispatch(patchSet(0, totalReps, weight, unit, userId, +cycleId, +routineId, +workId, +exerciseId, set.id));
     }
     if (data.errors) {
       setErrors(data.errors);

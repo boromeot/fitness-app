@@ -33,7 +33,7 @@ const SetCard = ({ set, showEditButtons }) => {
             <button className='delete-btn btn' onClick={handleDelete}>Delete</button>
           </div>
           <Modal title='Edit Set' onClose={() => setShowModal(false)} show={showModal} >
-            <SetForm />
+            <SetForm set={set} setShowModal={setShowModal} method='PATCH'/>
           </Modal>
         </>
       }

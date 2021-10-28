@@ -59,6 +59,8 @@ def patch_set(id):
       set.total_reps = form.data['total_reps'],
       set.weight = form.data['weight'],
       set.unit = form.data['unit'],
+      db.session.commit()
+      return set.to_dict()
     else:
       return {'errors': ['Unathorized']}
   else:

@@ -31,7 +31,7 @@ const RoutineCard = ({ routine, showEditButtons, cycleId, routineId}) => {
             <button className='delete-btn btn' onClick={e => handleDelete(e, cycleId)}>Delete</button>
           </div>
           <Modal title='Edit Routine' onClose={() => setShowModal(false)} show={showModal} >
-            <RoutineForm setShowModal={setShowModal} method='PATCH' cycleId={cycleId} routineId={routineId}/>
+            <RoutineForm routine={routine} setShowModal={setShowModal} method='PATCH' cycleId={cycleId} routineId={routineId}/>
           </Modal>
         </>
       }

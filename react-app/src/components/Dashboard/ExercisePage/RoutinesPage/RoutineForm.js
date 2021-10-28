@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { patchRoutine, postRoutine } from "../../../../store/routine";
 import { postWeeklyWorkout } from "../../../../store/workout";
 
-const RoutineForm = ({ setShowModal, method, cycleId, routineId }) => {
+const RoutineForm = ({ routine, setShowModal, method, cycleId, routineId }) => {
   const dispatch = useDispatch();
   const { id:userId } = useSelector(state => state.session.user);
-  const [name, setName] = useState('');
+  const [name, setName] = useState(routine?.name);
   const [errors, setErrors] = useState([]);
 
   const handleSubmit = async e => {
@@ -43,7 +43,9 @@ const RoutineForm = ({ setShowModal, method, cycleId, routineId }) => {
           value={name}
           onChange={handleChange}
           className='form-input exercise-page-form-input'
+          maxLength={25}
         />
+        <div>{`${name ? name.length : 0} / 25`}</div>
       </div>
       <button className='primary-btn btn' type='submit'>Submit</button>
     </form>

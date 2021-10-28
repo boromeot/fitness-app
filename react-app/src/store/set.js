@@ -102,7 +102,7 @@ export const patchSet = (completed_reps, total_reps, weight, unit, user_id, cycl
   });
   if (response.ok) {
     const set = await response.json();
-    dispatch(patch_set(set, cycleId, routineId, workId, exercise_id));
+    dispatch(patch_set(set, cycleId, routineId, workId, exercise_id, set_id));
     return set;
   } else {
     const data = await response.json();

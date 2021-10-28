@@ -1,7 +1,7 @@
 import { POST_ROUTINE, DELETE_ROUTINE, PATCH_ROUTINE } from "./routine";
 import { POST_WORKOUT, POST_WEEKLY_WORKOUT } from "./workout";
 import { DELETE_EXERCISE, POST_EXERCISE, PATCH_EXERCISE } from "./exercise";
-import { POST_SET, DELETE_SET } from "./set";
+import { POST_SET, DELETE_SET, PATCH_SET } from "./set";
 
 const GET_CYCLES = 'cycles/getCycles';
 const POST_CYCLE = 'cycles/postCycle';
@@ -209,6 +209,15 @@ export default function cycles(state = [], action) {
       newState[i].routines[j].workouts[k].exercises[l].sets = newState[i].routines[j].workouts[k].exercises[l].sets.filter(set => {
         return set.id !== action.payload.setId;
       });
+      return newState;
+    case PATCH_SET:
+      newState = [...state];
+      i = newState.findIndex(cycle => cycle.id === action.payload.cycleId);
+      j = newState[i].routines.findIndex(routine => routine.id === action.payload.routineId);
+      k = newState[i].routines[j].workouts.findIndex(workout => workout.id === action.payload.workId)
+      l = newState[i].routines[j].workouts[k].exercises.findIndex(exercise => exercise.id === action.payload.exerciseId);
+      let m = newState[i].routines[j].workouts[k].exercises[l].sets.findIndex(set => set.id === action.payload.setId);
+      newState[i].routines[j].workouts[k].exercises[l].sets[m] = action.payload.set;
       return newState;
     default:
       return state;

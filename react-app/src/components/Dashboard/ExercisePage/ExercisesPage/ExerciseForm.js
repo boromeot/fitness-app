@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { patchExercise, postExercise } from "../../../../store/exercise";
 
-const ExerciseForm = ({ setShowModal, method, cycleId, routineId, workId, exerciseId }) => {
+const ExerciseForm = ({ exercise, setShowModal, method, cycleId, routineId, workId, exerciseId }) => {
   const dispatch = useDispatch();
   const { id:userId } = useSelector(state => state.session.user);
-  const [name, setName] = useState('');
+  const [name, setName] = useState(exercise?.name);
   const [errors, setErrors] = useState([]);
 
   const handleSubmit = async e => {
@@ -39,7 +39,9 @@ const ExerciseForm = ({ setShowModal, method, cycleId, routineId, workId, exerci
           value={name}
           onChange={handleChange}
           className='form-input exercise-page-form-input'
+          maxLength={25}
         />
+        <div>{`${name ? name.length : 0} / 25`}</div>
       </div>
       <button className='primary-btn btn' type='submit'>Submit</button>
     </form>

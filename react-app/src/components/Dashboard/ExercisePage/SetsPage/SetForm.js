@@ -7,9 +7,9 @@ const SetForm = ({ set, setShowModal, method}) => {
   const { cycleId, routineId, workId, exerciseId } = useParams();
   const dispatch = useDispatch();
   const { id:userId } = useSelector(state => state.session.user);
-  const [totalReps, setTotalReps] = useState();
-  const [weight, setweight] = useState();
-  const [unit, setUnit] = useState('lb');
+  const [totalReps, setTotalReps] = useState(set?.total_reps);
+  const [weight, setweight] = useState(set?.weight);
+  const [unit, setUnit] = useState(set?.unit || 'lb');
   const [errors, setErrors] = useState([]);
 
   const handleSubmit = async e => {
@@ -42,6 +42,7 @@ const SetForm = ({ set, setShowModal, method}) => {
           className='form-input exercise-page-form-input'
           type='number'
           min={0}
+          max={9999}
         />
         <input
           name='weight'
@@ -51,6 +52,7 @@ const SetForm = ({ set, setShowModal, method}) => {
           className='form-input exercise-page-form-input'
           type='number'
           min={0}
+          max={9999}
         />
         <select value={unit} onChange={e => setUnit(e.target.value)} className='form-input exercise-page-form-input'>
           <option selected value="lb">lb</option>

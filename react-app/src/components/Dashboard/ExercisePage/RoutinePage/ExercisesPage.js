@@ -4,15 +4,22 @@ import { useParams } from "react-router";
 import { createPortal } from "react-dom";
 import Modal from "../../../Modal/Modal";
 import ExerciseForm from "./ExerciseForm";
+import { NavLink } from "react-router-dom";
+import ExerciseCard from "./ExerciseCard";
 
 const ExercisesPage = () => {
   const [loaded, setLoaded] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
-
+  const [showEditButtons, setShowEditButtons] = useState(false);
   //usEffect is needed because the portal was trying to get 'routine-page-create-container' before the dom node existed
   useEffect(() => {
     setLoaded(true);
   }, [])
+
+  const toggleEditMode = e => {
+    e.preventDefault();
+    setShowEditButtons(prev => !prev);
+  }
 
   const handleCreate = e => {
     e.preventDefault();
@@ -24,21 +31,35 @@ const ExercisesPage = () => {
   const currentCycle = cycles.find(cycle => cycle.id === +cycleId);
   const currentRoutine = currentCycle.routines.find(routine => routine.id === +routineId);
   const currentDay = currentRoutine.workouts.find(workout => workout.id === +workId);
+
   return (
     <>
       <div className='card-container'>
         {
           currentDay?.exercises.map(exercise => {
-            return <div className='card' key={exercise.id}>{exercise.name}</div>
+          //   return <div className='card' key={exercise.id}>{exercise.name}</div>
+            return (
+              <NavLink to='#' className='card'>
+                <ExerciseCard
+                  exercise={exercise}
+                  showEditButtons={showEditButtons}
+                />
+              </NavLink>
+            )
           })
         }
       </div>
 
       {loaded &&
         createPortal(
-          <button className='page-template-create primary-btn btn' onClick={handleCreate}>
-            Create new Exercise
-          </button>,
+          <>
+            <button className='page-template-edit edit-btn btn' onClick={toggleEditMode}>
+              Edit mode
+            </button>
+            <button className='page-template-create primary-btn btn' onClick={handleCreate}>
+              Create new Exercise
+            </button>
+          </>,
           document.getElementById('routine-page-create-container')
         )
         //Portal is being used because the button and modal needs to know what ExercisePage / day they belong to

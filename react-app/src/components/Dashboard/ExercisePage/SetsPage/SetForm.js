@@ -29,13 +29,14 @@ const SetForm = ({ setShowModal, method}) => {
 
   return (
     <form onSubmit={handleSubmit} className='form-container exercise-page-form-container'>
-      {errors[0] &&
-        <div className='form-error exercise-page-form-error'>{errors[0]}</div>
+      {errors?.map(error => {
+          return <div className='form-error exercise-page-form-error'>{error}</div>
+        })
       }
       <div>
         <input
           name='totalReps'
-          placeholder='Number of totalReps'
+          placeholder='Number of total reps'
           value={totalReps}
           onChange={e => setTotalReps(e.target.value)}
           className='form-input exercise-page-form-input'

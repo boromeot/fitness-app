@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useParams, useRouteMatch } from "react-router-dom";
 import { createPortal } from "react-dom";
 import Modal from "../../../Modal/Modal";
 import ExerciseForm from "./ExerciseForm";
@@ -11,6 +11,7 @@ const ExercisesPage = () => {
   const [loaded, setLoaded] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditButtons, setShowEditButtons] = useState(false);
+  const { url } = useRouteMatch();
   //usEffect is needed because the portal was trying to get 'routine-page-create-container' before the dom node existed
   useEffect(() => {
     setLoaded(true);
@@ -38,7 +39,7 @@ const ExercisesPage = () => {
         {
           currentDay?.exercises.map(exercise => {
             return (
-              <NavLink to='#' className='card' key={exercise.id}>
+              <NavLink to={`${url}/exercises/${exercise.id}`} className='card' key={exercise.id}>
                 <ExerciseCard
                   exercise={exercise}
                   showEditButtons={showEditButtons}

@@ -34,7 +34,7 @@ const CycleCard = ({ cycle, showEditButtons }) => {
             <CycleForm
               setShowModal={setShowModal}
               method='PATCH'
-              cycleId={cycle.id}
+              cycle={cycle}
             />
           </Modal>
         </>

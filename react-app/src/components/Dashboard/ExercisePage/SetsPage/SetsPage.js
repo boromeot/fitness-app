@@ -11,7 +11,7 @@ import SetForm from './SetForm';
 
 
 const SetsPage = () => {
-  const { userId, cycleId, routineId, workId, exerciseId } = useParams();
+  const { cycleId, routineId, workId, exerciseId } = useParams();
   const cycles = useSelector(state => state.cycles)
   const currentCycle = cycles.find(cycle => cycle.id === +cycleId);
   const currentRoutine = currentCycle.routines.find(routine => routine.id === +routineId);

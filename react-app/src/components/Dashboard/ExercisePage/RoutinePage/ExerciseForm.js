@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { postExercise } from "../../../../store/exercise";
+import { patchExercise, postExercise } from "../../../../store/exercise";
 
-const ExerciseForm = ({ setShowModal, method, cycleId, routineId, workId }) => {
+const ExerciseForm = ({ setShowModal, method, cycleId, routineId, workId, exerciseId }) => {
   const dispatch = useDispatch();
   const { id:userId } = useSelector(state => state.session.user);
   const [name, setName] = useState('');
@@ -14,7 +14,7 @@ const ExerciseForm = ({ setShowModal, method, cycleId, routineId, workId }) => {
     if (method === 'POST') {
       data = await dispatch(postExercise(name, 'legs', userId, +cycleId, +routineId, +workId));
     } else if (method === 'PATCH') {
-      // data = await dispatch(patchRoutine(name, userId, +cycleId, routineId));
+      data = await dispatch(patchExercise(name, 'arms', userId, +cycleId, +routineId, +workId, exerciseId))
     }
     if (data.errors) {
       setErrors(data.errors);

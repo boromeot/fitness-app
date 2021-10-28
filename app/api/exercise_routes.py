@@ -43,3 +43,20 @@ def delete_exercise(id):
     return {'message': 'Successfully deleted routine'}
   else:
     return {'errors': ['Unathorized']}
+
+@exercise_routes.route('/<int:id>', methods=['PATCH'])
+@login_required
+def patch_exercise(id):
+  form = ExerciseForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    exercise = Exercise.query.get(id)
+    if current_user.id == exercise.user_id:
+      exercise.name = form.data['name']
+      exercise.body_part = form.data['body_part']
+      db.session.commit()
+      return exercise.to_dict()
+    else:
+      return {'errors': ['Unathorized']}
+  else:
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401

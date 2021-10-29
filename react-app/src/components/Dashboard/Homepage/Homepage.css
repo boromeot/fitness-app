@@ -1,3 +1,35 @@
+@keyframes moveToRight {
+  0% {
+    opacity: 0%;
+    transform: translateX(-50rem);
+  }
+
+  80% {
+    transform: translateX(1rem);
+  }
+
+  100% {
+    opacity: 100%;
+    transform: translateX(0rem);
+  }
+}
+
+@keyframes moveToLeft {
+  0% {
+    opacity: 0%;
+    transform: translateX(50rem);
+  }
+
+  80% {
+    transform: translateX(-1rem);
+  }
+
+  100% {
+    opacity: 100%;
+    transform: translateX(0rem);
+  }
+}
+
 .homepage-container {
   position: relative;
   display: flex;
@@ -12,8 +44,12 @@
 .homepage-heading {
   font-size: 6rem;
   margin-bottom: 4rem;
+  animation: moveToRight;
+  animation-duration: 2s;
 }
 
 .homepage-subheading {
   font-size: 3rem;
+  animation: moveToLeft;
+  animation-duration: 2s;
 }

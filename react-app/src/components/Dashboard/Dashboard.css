@@ -10,7 +10,6 @@
   max-height: 100vh;
 }
 
-
 /* panel */
 .dashboard-panel {
   height: 100vh;
@@ -50,6 +49,11 @@
   border-top-left-radius: 3rem;
   border-bottom-left-radius: 3rem;
   color: var(--light-shade);
+}
+
+.dashboard-link:hover {
+  background-color: var(--light-shade);
+  color: var(--dark-shade);
 }
 
 .active {

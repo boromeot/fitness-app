@@ -12,8 +12,12 @@
 }
 
 .primary-btn {
-  background-color: green;
+  background-color: 	rgb(0,128,0);
   color: var(--light-shade);
+}
+
+.primary-btn:hover {
+  background-color: rgb(0, 108, 0);
 }
 
 .edit-btn {
@@ -21,12 +25,24 @@
   color: var(--light-shade);
 }
 
+.edit-btn:hover {
+  background-color: rgb(160, 160, 160);
+}
+
 .delete-btn {
-  background-color: crimson;
+  background-color: rgb(220, 20, 60);
   color: var(--light-shade);
 }
 
+.delete-btn:hover {
+  background-color: rgb(190, 0, 30);
+}
+
 .back-btn {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   border: solid 1px #444;
+}
+
+.back-btn:hover {
+  background-color: rgb(230, 230, 230);
 }

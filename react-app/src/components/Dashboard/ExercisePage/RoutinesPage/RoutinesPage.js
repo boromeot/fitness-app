@@ -38,7 +38,7 @@ const RoutinesPage = () => {
           {`Create new Routine`}
         </button>
       </div>
-      <div className='page-header'>{currentCycle.name}</div>
+      <div className='page-header'>{currentCycle.name} routines</div>
       <NavLink to={`/users/${userId}/dashboard/exercise/cycles`} className='back-btn btn'>
         Back
       </NavLink>

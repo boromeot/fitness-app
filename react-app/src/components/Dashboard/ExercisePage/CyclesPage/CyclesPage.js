@@ -33,6 +33,7 @@ const CyclesPage = () => {
       <button className='page-template-edit edit-btn btn' onClick={toggleEditMode}>
         Edit mode
       </button>
+      <div className='page-header'>Your cycles</div>
     </div>
     <div className='card-container'>
       {

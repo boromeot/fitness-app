@@ -43,7 +43,7 @@ const CycleForm = ({ cycle, setShowModal, method  }) => {
           className='form-input exercise-page-form-input'
           maxLength={25}
         />
-        <div>{`${name ? name.length : 0} / 25`}</div>
+        <div className='char-limit'>{`${name ? name.length : 0} / 25`}</div>
       </div>
       <button className='primary-btn btn' type='submit'>Submit</button>
     </form>

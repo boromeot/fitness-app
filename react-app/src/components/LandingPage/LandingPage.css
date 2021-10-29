@@ -53,6 +53,10 @@
   color: var(--dark-shade);
 }
 
+.landing-page-main-btn:hover {
+  background-color: rgb(220, 220, 220);
+}
+
 /* Info card seciton */
 #landing-page-info-cards {
   display: flex;
@@ -81,13 +85,13 @@
 .landinge-page-card-info {
   color: rgb(85, 85, 85);
 }
+
 /* Inspiring section */
 #landing-page-inspiring {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--primary-color);
-
 }
 
 .landing-page-inspiring-spacer {

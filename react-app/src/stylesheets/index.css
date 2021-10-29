@@ -3,11 +3,14 @@ html {
   font-size: 62.5%;
   font-family: Helvetica;
   --white-color: #ffffff;
-  --primary-color: #60AEDD;
+  /* --primary-color: #60AEDD; Baby blue*/
+  /* --primary-color: #c8a2c8; Lilac */
+  --primary-color: #26619c; /*Lapis Lazuli*/
   --dark-accent: #965F6C;
   --light-accent: #D6BB1C;
   --dark-shade: #161728;
   --light-shade: #F4F6F6;
+  --lilac: #C8A2C8;
   box-sizing: border-box;
   height: 100%;
 }

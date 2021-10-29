@@ -42,7 +42,7 @@ const LoginForm = () => {
   return (
     <div className='form-container'>
       <div className='form-logo-container' >
-        <img src='https://i.imgur.com/70MGKx1.png' alt='' />
+        <img src='https://i.imgur.com/PcizS9M.png' alt='' />
       </div>
       <form onSubmit={onLogin} className='form-card'>
           <h2 className='form-heading'>Log in</h2>
@@ -81,7 +81,7 @@ const LoginForm = () => {
             New here?&nbsp;
             <NavLink to='/sign-up' >Sign up</NavLink>
         </div>
-        <button onClick={demoLogin} className='btn'>
+        <button onClick={demoLogin} className='form-demo-btn btn'>
           Demo login
         </button>
       </form>

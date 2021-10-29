@@ -71,6 +71,7 @@
   border: none;
 }
 
-.form-login-btn:hover {
+.form-login-btn:hover, .form-demo-btn:hover {
   cursor: pointer;
+  background-color: rgb(220, 220, 220);
 }

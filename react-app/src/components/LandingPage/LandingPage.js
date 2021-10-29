@@ -24,7 +24,7 @@ const LandingPage = () => {
         </div>
       <section className='landing-page-section' id='landing-page-header'>
         <div className='landing-page-heading-container'>
-          <h1 className='landing-page-heading'>TITLE</h1>
+          <h1 className='landing-page-heading'>Fitness Tracker</h1>
           <h2 className='landing-page-subheading'>Be an inspiration.</h2>
           <NavLink className='landing-page-main-btn' to='/login' >Explore</NavLink>
         </div>
@@ -34,33 +34,30 @@ const LandingPage = () => {
           <h2 className='landing-page-card-heading'>
             Achieve your goals
           </h2>
-          <p className='landinge-page-card-info'>Lorem ipsum dorlor me mos vatan di supta</p>
-          <p className='landinge-page-card-info'>Lorem ipsum dorlor me mos vatan di supta</p>
-          <p className='landinge-page-card-info'>Lorem ipsum dorlor me mos vatan di supta</p>
+          <p className='landinge-page-card-info'>AAAAAAAAAAAAAAAHHHHHHH</p>
+          <p className='landinge-page-card-info'></p>
+          <p className='landinge-page-card-info'></p>
         </div>
         <div className='landing-page-card'>
           <h2 className='landing-page-card-heading'>
             Stay organized
           </h2>
-          <p className='landinge-page-card-info'>Lorem ipsum dorlor me mos vatan di supta</p>
-          <p className='landinge-page-card-info'>Lorem ipsum dorlor me mos vatan di supta</p>
+          <p className='landinge-page-card-info'></p>
+          <p className='landinge-page-card-info'></p>
         </div>
         <div className='landing-page-card'>
           <h2 className='landing-page-card-heading'>
             Track your progress
           </h2>
-          <p className='landinge-page-card-info'>Lorem ipsum dorlor me mos vatan di supta</p>
-          <p className='landinge-page-card-info'>Lorem ipsum dorlor me mos vatan di supta</p>
-          <p className='landinge-page-card-info'>Lorem ipsum dorlor me mos vatan di supta</p>
+          <p className='landinge-page-card-info'>Fitness tracker makes it easy</p>
+          <p className='landinge-page-card-info'>Log your exercises</p>
+          <p className='landinge-page-card-info'></p>
         </div>
       </section>
       <section className='landing-page-section' id='landing-page-inspiring'>
         <div className='landing-page-inspiring-spacer'>
           <div className='landing-page-inspiring-text'>
            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </div>
-          <div className='landing-page-inspiring-carousel'>
-            <img className='landing-page-carousel-image' src='https://i.imgur.com/15kuubS.jpg' alt='' />
           </div>
         </div>
       </section>

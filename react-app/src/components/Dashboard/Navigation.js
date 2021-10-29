@@ -9,15 +9,15 @@ const Navigation = ({ children }) => {
   const { url } = useRouteMatch();
   return (
     <nav className='navigation-container'>
-      <NavLink to={`${url}/exercise/cycles`} className='navigation-cycle'>
+      {/* <NavLink to={`${url}/exercise/cycles`} className='navigation-cycle'>
         Cycles
-      </NavLink>
-      <NavLink to={`${url}/exercise/routines`} className='navigation-cycle'>
+      </NavLink> */}
+      {/* <NavLink to={`${url}/exercise/routines`} className='navigation-cycle'>
         Routines
       </NavLink>
       <NavLink to={`${url}/exercise/exercises`} className='navigation-cycle'>
         Exercises
-      </NavLink>
+      </NavLink> */}
       <div className='navigation-profile'>
         { username }
         <LogoutButton />

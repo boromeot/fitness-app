@@ -38,6 +38,7 @@ const RoutinesPage = () => {
           {`Create new Routine`}
         </button>
       </div>
+      <div className='page-header'>{currentCycle.name}</div>
       <NavLink to={`/users/${userId}/dashboard/exercise/cycles`} className='back-btn btn'>
         Back
       </NavLink>
@@ -46,7 +47,7 @@ const RoutinesPage = () => {
       {
         currentCycle.routines?.map(routine => {
           return (
-            <NavLink to={`${url}/${routine.id}`} className='card' key={routine.id}>
+            <NavLink to={`${url}/${routine.id}/workouts/${routine.workouts[1]?.id}`} className='card' key={routine.id}>
               <RoutineCard
                 routine={routine}
                 showEditButtons={showEditButtons}

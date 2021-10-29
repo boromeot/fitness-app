@@ -18,15 +18,15 @@ const Dashboard = () => {
           </NavLink>
         </div>
         <div className='dashboard-link-container'>
-          <NavLink to={`${url}/exercise`} className='dashboard-link' activeClassName='active'>
+          <NavLink to={`${url}/exercise/cycles`} className='dashboard-link' activeClassName='active'>
             Exercise
           </NavLink>
-          <NavLink to={`${url}/diet`} className='dashboard-link'>
+          {/* <NavLink to={`${url}/diet`} className='dashboard-link'>
             Diet
           </NavLink>
           <NavLink to={`${url}/progress`} className='dashboard-link'>
             Progress
-          </NavLink>
+          </NavLink> */}
         </div>
       </div>
       <div className='dashboard-content-container'>

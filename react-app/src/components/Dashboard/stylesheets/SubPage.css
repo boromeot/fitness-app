@@ -8,8 +8,9 @@
   flex-direction: row-reverse;
 }
 
-.page-template-edit-delete-container {
+.page-header {
   margin-left: auto;
+  margin-right: auto;
 }
 
 .page-template-create, .page-template-edit {

@@ -22,7 +22,7 @@ const WorkoutsPage = () => {
         <div className='page-template-edit-delete-container' id='routine-page-create-container'>
           {/*A portal will be created to this container */}
         </div>
-        <div className='page-header'>{currentRoutine.name} exercises</div>
+        <div className='page-header'>{capitalize(currentRoutine.name)} exercises</div>
         <NavLink to={`/users/${userId}/dashboard/exercise/cycles/${cycleId}/routines`} className='back-btn btn'>
           Back
         </NavLink>

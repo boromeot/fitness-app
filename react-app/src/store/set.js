@@ -43,7 +43,6 @@ const patch_set = (set, cycleId, routineId, workId, exerciseId, setId) => {
 }
 
 export const postSet = (total_reps, weight, unit, user_id, cycleId, routineId, workId, exercise_id) => async dispatch => {
-  console.log(user_id, exercise_id, 'from thunk');
   const response = await fetch(`/api/sets/`, {
     method: 'POST',
     headers: {

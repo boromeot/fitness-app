@@ -34,33 +34,33 @@ const LandingPage = () => {
           <h2 className='landing-page-card-heading'>
             Achieve your goals
           </h2>
-          <p className='landinge-page-card-info'>AAAAAAAAAAAAAAAHHHHHHH</p>
-          <p className='landinge-page-card-info'></p>
-          <p className='landinge-page-card-info'></p>
+          <p className='landinge-page-card-info'>Achieve a fuller, more balanced life </p>
+          <p className='landinge-page-card-info'>Stay active & healthy</p>
+          <p className='landinge-page-card-info'>Get moving to manage stress</p>
         </div>
         <div className='landing-page-card'>
           <h2 className='landing-page-card-heading'>
             Stay organized
           </h2>
-          <p className='landinge-page-card-info'></p>
-          <p className='landinge-page-card-info'></p>
+          <p className='landinge-page-card-info'>No more losing physical training logs</p>
+          <p className='landinge-page-card-info'>Save time and increase productivity </p>
         </div>
         <div className='landing-page-card'>
           <h2 className='landing-page-card-heading'>
             Track your progress
           </h2>
           <p className='landinge-page-card-info'>Fitness tracker makes it easy</p>
-          <p className='landinge-page-card-info'>Log your exercises</p>
-          <p className='landinge-page-card-info'></p>
+          <p className='landinge-page-card-info'>Log your exercises and stay organized</p>
+          <p className='landinge-page-card-info'>Track your progress over time</p>
         </div>
       </section>
-      <section className='landing-page-section' id='landing-page-inspiring'>
+      {/* <section className='landing-page-section' id='landing-page-inspiring'>
         <div className='landing-page-inspiring-spacer'>
           <div className='landing-page-inspiring-text'>
            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
 
   )

@@ -48,7 +48,9 @@ const SignUpForm = () => {
   return (
    <div className='form-container'>
     <div className='form-logo-container' >
-      <img src='https://i.imgur.com/PcizS9M.png' alt='wolf logo'/>
+      <NavLink to='/'>
+        <img src='https://i.imgur.com/PcizS9M.png' alt='wolf logo'/>
+      </NavLink>
     </div>
     <form onSubmit={onSignUp} className='form-card'>
         <h2 className='form-heading'>Sign up</h2>

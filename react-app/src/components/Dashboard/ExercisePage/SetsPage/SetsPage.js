@@ -4,10 +4,11 @@ import { useSelector } from 'react-redux';
 import { createPortal } from 'react-dom';
 import Modal from '../../../Modal/Modal';
 import SetCard from './SetCard';
+import SetForm from './SetForm';
 import '../../stylesheets/SubPage.css';
 import '../../../../stylesheets/buttons.css';
 import '../../stylesheets/Form.css';
-import SetForm from './SetForm';
+import './SetCard.css';
 
 
 const SetsPage = () => {
@@ -38,7 +39,7 @@ const SetsPage = () => {
 
   return (
     <div className='page-template-container'>
-      <div className='card-container'>
+      <div className='card-container set-card'>
         {
           currentExercise.sets?.map(set => {
             return (

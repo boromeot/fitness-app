@@ -1,12 +1,12 @@
 # Fitness Tracker's purpose
 
-Fitness tracker allows the user to record their exerise data into easy to view cycles.
+Fitness tracker allows the user to record their exerise data into easy to view Cycles.
 
 ## Cycles 
-A user can create Cycles which are collections of weekly routines.
+A user can create Cycles which are collections of weekly routines. Use a Cycle to group together related weekly routines.
 
 ## Routines
-A user can create Routines which are collections of exercises throught a week.
+A user can create Routines which are collections of exercises throught a week. 
 
 ## Exercises
 A user can create Exercises which can have many sets.

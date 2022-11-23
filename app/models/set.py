@@ -1,7 +1,9 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class Set(db.Model):
   __tablename__ = 'sets'
+  if environment == "production":
+      __table_args__ = {'schema': SCHEMA}
   id = db.Column(db.Integer, primary_key=True)
   completed_reps = db.Column(db.Integer, default=0)
   total_reps = db.Column(db.Integer)
@@ -10,8 +12,8 @@ class Set(db.Model):
   body_weight = db.Column(db.Boolean, default=False)
 
   #Foreign Keys
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-  exercise_id = db.Column(db.Integer, db.ForeignKey('exercises.id'))
+  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+  exercise_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('exercises.id')))
 
   #Relationships
   user = db.relationship('User', back_populates='sets')

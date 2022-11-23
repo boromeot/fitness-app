@@ -1,14 +1,16 @@
 from app.models.exercise import Exercise
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class Workout(db.Model):
   __tablename__ = 'workouts'
+  if environment == "production":
+    __table_args__ = {'schema': SCHEMA}
   id = db.Column(db.Integer, primary_key=True)
   day = db.Column(db.String, nullable=False)
 
   #Foreign Keys
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-  routine_id = db.Column(db.Integer, db.ForeignKey('routines.id'))
+  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+  routine_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('routines.id')))
 
   #Relationships
   user = db.relationship('User', back_populates='workouts')
